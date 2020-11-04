@@ -1,7 +1,7 @@
 # MetENP
 Metabolite enrichment analysis and their associated enriched pathways.
 
-## Introduction to Enrichment Pipeline
+## Introduction to MetENP
 
 MetENP is a R package that enables detection of significant metabolites from metabolite information 
 (names or names and concentration along with metadata information) and provides
