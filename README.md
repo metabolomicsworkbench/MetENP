@@ -13,6 +13,7 @@ MetENP is a R package that enables detection of significant metabolites from met
 5. Gets gene info, reaction info, enzyme info
 
 For more info, check out the vignette.
+Contact: biosonal@gmail.com; kschoudhary@eng.ucsd.edu
 
 
 ## Installation
@@ -61,8 +62,8 @@ suppressMessages(library(jsonlite))<br/>
 suppressMessages(library(rjson))<br/>
 suppressMessages(library(tidyverse))<br/>
 
-### And load all the function with appropriate path (replace 'path' to your own path). 
-### Please note this step is needed only when you do not wish to download or are hving difficulty in downloading the package
+#### And load all the function with appropriate path (replace 'path' to your own path). 
+#### Please note this step is needed only when you do not wish to download or are hving difficulty in downloading the package
 
 source('path/compoundinfo.R')<br/>
 source('path/anova_ana.R')<br/>
