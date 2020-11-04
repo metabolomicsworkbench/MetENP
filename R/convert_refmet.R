@@ -14,7 +14,7 @@ convert_refmet = function(metdata){
   path=URLencode(path)
   r <- httr::GET(url = path)
   r <- httr::content(r, as = "text", encoding = "UTF-8")
-  df1 <- fromJSON(r)
+  df1 <- jsonlite::fromJSON(r)
   if (!sjmisc::is_empty(df1)){
   if (typeof(df1[[names(df1)[1]]]) == 'character'){
     res=lapply(df1, function(i) (unlist(i, recursive = TRUE)))
