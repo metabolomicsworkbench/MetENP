@@ -26,10 +26,10 @@ MetENP package depends on following Bioconductor packages to function properly: 
 
 if (!requireNamespace("BiocManager", quietly = TRUE))
  install.packages("BiocManager")    
- BiocManager::install("KEGGREST")
- BiocManager::install("KEGGgraph")
- BiocManager::install("pathview")
- BiocManager::install("KEGG.db")
+ BiocManager::install("KEGGREST")<br/>
+ BiocManager::install("KEGGgraph")<br/>
+ BiocManager::install("pathview")<br/>
+ BiocManager::install("KEGG.db")<br/>
  
  #### Now proceed with installation
  
