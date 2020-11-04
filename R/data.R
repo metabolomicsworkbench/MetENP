@@ -11,5 +11,7 @@
 #' data(ls_path)
 "ls_path"
 "korg"
+"example.txt"
+"human_cachexia.csv"
 
 
