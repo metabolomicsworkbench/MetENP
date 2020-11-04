@@ -42,51 +42,51 @@ Install other dependencies and then try installing again: plyr,dplyr,tidyr,purrr
     
 #### If you do not wish to install, alternatively, download from github(https://github.com/metabolomicsworkbench/MetENP) and load libraries and functions
 
-suppressMessages(library(plyr))
-suppressMessages(library(dplyr))
-suppressMessages(library(tidyr))
-suppressMessages(library(tidygraph))
-suppressMessages(library(KEGGREST))
-suppressMessages(library(KEGGgraph))
-suppressMessages(library(KEGG.db))
-suppressMessages(library(pathview))
-suppressMessages(library(reshape2))
-suppressMessages(library(ggplot2))
-suppressMessages(library(ggrepel))
-suppressMessages(library(igraph))
-suppressMessages(library(ggraph))
-suppressMessages(library(httr))
-suppressMessages(library(stringr))
-suppressMessages(library(jsonlite))
-suppressMessages(library(rjson))
-suppressMessages(library(tidyverse))
+suppressMessages(library(plyr))<br/>
+suppressMessages(library(dplyr))<br/>
+suppressMessages(library(tidyr))<br/>
+suppressMessages(library(tidygraph))<br/>
+suppressMessages(library(KEGGREST))<br/>
+suppressMessages(library(KEGGgraph))<br/>
+suppressMessages(library(KEGG.db))<br/>
+suppressMessages(library(pathview))<br/>
+suppressMessages(library(reshape2))<br/>
+suppressMessages(library(ggplot2))<br/>
+suppressMessages(library(ggrepel))<br/>
+suppressMessages(library(igraph))<br/>
+suppressMessages(library(ggraph))<br/>
+suppressMessages(library(httr))<br/>
+suppressMessages(library(stringr))<br/>
+suppressMessages(library(jsonlite))<br/>
+suppressMessages(library(rjson))<br/>
+suppressMessages(library(tidyverse))<br/>
 
 ### And load all the function with appropriate path (replace 'path' to your own path). 
 ### Please note this step is needed only when you do not wish to download or are hving difficulty in downloading the package
 
-source('path/compoundinfo.R')
-source('path/anova_ana.R')
-source('path/met_pathways.R')
-source('path/mapspspath.R')
-source('path/metclassenrichment.R')
-source('path/metcountplot.R')
-source('path/getmwstudies.R')
-source('path/path_enrichmentscore.R')
-source('path/pathinfo.R')
-source('path/plot_met_enrichment.R')
-source('path/plot_volcano.R')
-source('path/rxninfo.R')
-source('path/significant_met.R')
-source('path/significant_met_own.R')
-source('path/enzyme_gene_info.R')
-source('path/plot_heatmap.R')
-source('path/plot_pathway_networks.R')
-source('path/react_substrate.R')
-source('path/dotplot_met_class_path.R')
-source('path/convert_refmet.R')
-source('path/map_keggid.R')
-source('path/partial_join.R')
-source('path/getExtension.R')
-source('path/separate_data.R')
+source('path/compoundinfo.R')<br/>
+source('path/anova_ana.R')<br/>
+source('path/met_pathways.R')<br/>
+source('path/mapspspath.R')<br/>
+source('path/metclassenrichment.R')<br/>
+source('path/metcountplot.R')<br/>
+source('path/getmwstudies.R')<br/>
+source('path/path_enrichmentscore.R')<br/>
+source('path/pathinfo.R')<br/>
+source('path/plot_met_enrichment.R')<br/>
+source('path/plot_volcano.R')<br/>
+source('path/rxninfo.R')<br/>
+source('path/significant_met.R')<br/>
+source('path/significant_met_own.R')<br/>
+source('path/enzyme_gene_info.R')<br/>
+source('path/plot_heatmap.R')<br/>
+source('path/plot_pathway_networks.R')<br/>
+source('path/react_substrate.R')<br/>
+source('path/dotplot_met_class_path.R')<br/>
+source('path/convert_refmet.R')<br/>
+source('path/map_keggid.R')<br/>
+source('path/partial_join.R')<br/>
+source('path/getExtension.R')<br/>
+source('path/separate_data.R')<br/>
 
 Now please follow example in the vignette
