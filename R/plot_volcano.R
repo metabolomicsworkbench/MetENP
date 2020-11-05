@@ -15,6 +15,7 @@
 #' @importFrom ggplot2 theme
 #' @importFrom ggplot2 geom_hline
 #' @importFrom ggplot2 geom_vline
+#' @importFrom ggplot2 geom_text
 #' @importFrom ggplot2 scale_color_manual
 #' @importFrom ggplot2 element_text
 #'@importFrom ggrepel geom_text_repel
