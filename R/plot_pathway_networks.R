@@ -61,10 +61,10 @@ theme_set(thm)
 
 
 if (colorEdge) {
-  #igraph::E(graph_routes)$category <- factor(met_pathtoplot2$PATHWAY)
-  edge_color <- geom_edge_diagonal(aes(colour=factor(met_pathtoplot2$PATHWAY)), alpha=.8,show.legend=FALSE)
+  igraph::E(graph_routes)$category <- factor(met_pathtoplot2$PATHWAY)
+  #edge_color <- geom_edge_diagonal(aes(colour=factor(met_pathtoplot2$PATHWAY)), alpha=.8,show.legend=FALSE)
   #edge_color <- geom_edge_diagonal(alpha=.8, colour='gray')
-  #edge_color <- geom_edge_diagonal(aes_(colour = ~category), alpha=.8,show.legend=FALSE)
+  edge_color <- geom_edge_diagonal(aes_(colour = ~category), alpha=.8,show.legend=FALSE)
 } else {
   edge_color <- geom_edge_diagonal(alpha=.8, colour='gray')
 }
