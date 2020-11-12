@@ -33,14 +33,15 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
  BiocManager::install("KEGG.db")<br/>
  
  #### Now proceed with installation
-1) <strong>Through devtools </strong>
+1) <strong>Through devtools </strong></br>
+
  devtools::install("MetENP")
  
  If above steps gives error:
 Install other dependencies and then try installing again: plyr,dplyr,tidyr,purrr,tidygraph,reshape2,ggplot2,ggrepel,
     igraph,ggraph,httr,stringr,jsonlite,rjson,tidyverse,magrittr
 
-2) Through Anaconda
+2) <strong>Through Anaconda </strong></br>
 
    environment.yml file is present in the repository. 
    This file can be used be with Anaconda to install all of the R requirements. 
