@@ -18,7 +18,7 @@ Contact: biosonal@gmail.com; kschoudhary@eng.ucsd.edu
 
 ## Installation
 
-install.packages("devtools")
+install.packages("devtools")<br/>
 library("devtools")
 
 MetENP package depends on following Bioconductor packages to function properly: KEGGREST, KEGGgraph, pathview and KEGG.db. 
@@ -33,14 +33,22 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
  BiocManager::install("KEGG.db")<br/>
  
  #### Now proceed with installation
- 
+1) <strong>Through devtools </strong>
  devtools::install("MetENP")
  
  If above steps gives error:
 Install other dependencies and then try installing again: plyr,dplyr,tidyr,purrr,tidygraph,reshape2,ggplot2,ggrepel,
     igraph,ggraph,httr,stringr,jsonlite,rjson,tidyverse,magrittr
-    
-    
+
+2) Through Anaconda
+
+   environment.yml file is present in the repository. 
+   This file can be used be with Anaconda to install all of the R requirements. 
+
+   Pre-requisite is Anaconda, run: 
+   conda env create -n metenp -f environment.yml to create the conda environment then activate the environment by running:
+   conda activate metenp
+   
 #### If you do not wish to install, alternatively, download from github(https://github.com/metabolomicsworkbench/MetENP) and load libraries and functions
 
 suppressMessages(library(plyr))<br/>
