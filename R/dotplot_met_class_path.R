@@ -10,7 +10,7 @@
 #'@importFrom ggplot2 guide_colorbar
 #'@export
 #'@examples
-#'dotplot_met_class_path (met_path, kegg_es,"sub_class")
+#'dotplot_met_class_path (met_path, kegg_es,"sub_class", xaxis, yaxis)
 
 dotplot_met_class_path = function(met_path, kegg_es,classm,xaxis,yaxis){
 
