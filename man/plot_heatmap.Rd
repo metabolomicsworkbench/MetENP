@@ -4,7 +4,7 @@
 \alias{plot_heatmap}
 \title{Plots heatmap}
 \usage{
-plot_heatmap(met_path, shorten_name = TRUE, refmet_name = FALSE)
+plot_heatmap(met_path, shorten_name = TRUE, refmet_name = FALSE, xaxis, yaxis)
 }
 \arguments{
 \item{met_path}{dataframe of pathways mapped to significant metabolites}
@@ -12,10 +12,14 @@ plot_heatmap(met_path, shorten_name = TRUE, refmet_name = FALSE)
 \item{shorten_name}{default TRUE if metabolite names are too big}
 
 \item{refmet_name}{default false, set to true if you want to plot according to refmet names}
+
+\item{xaxis}{font size for x axis}
+
+\item{yaxis}{fonr axis for y axis}
 }
 \description{
 Plots heatmap
 }
 \examples{
-plot_heatmap(met_path)
+plot_heatmap(met_path, shorten_name=TRUE,refmet_name=FALSE, xaxis, yaxis)
 }
