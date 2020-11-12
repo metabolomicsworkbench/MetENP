@@ -2,6 +2,8 @@
 #'@param kegg_es dataframe of enrichment score of pathways
 #'@param met_path dataframe of pathways mapped to significant metabolites
 #'@param classm metabolite class super_class, main_class or sub_class
+#'@param xaxis font of x axis
+#'@param yaxis font of y axis
 #'@importFrom dplyr count
 #'@importFrom dplyr rename
 #'@importFrom ggplot2 scale_color_continuous
@@ -10,7 +12,7 @@
 #'@examples
 #'dotplot_met_class_path (met_path, kegg_es,"sub_class")
 
-dotplot_met_class_path = function(met_path, kegg_es,classm){
+dotplot_met_class_path = function(met_path, kegg_es,classm,xaxis,yaxis){
 
 met_pathdotplot = unique(met_path[,c('Metabolite','PATHWAY','log2Fold_change',classm)])
 global_pathways = c('Metabolic pathways','Biosynthesis of secondary metabolites',
@@ -44,8 +46,8 @@ ggplot(significant_pathways, aes_(y=~PATHWAY, x=significant_pathways[[classm]]))
   theme_bw() + labs(color = "-log10 p-value HG")+
 
   theme(#panel.grid.major = element_blank(),
-        axis.text.x=element_text(angle = 90, hjust = 1,size = 10),
-          axis.text.y = element_text(size = 10),
+        axis.text.x=element_text(angle = 90, hjust = 1,size = xaxis),
+          axis.text.y = element_text(size = yaxis),
         axis.title.x = element_text(size=14, face="bold"),
         axis.title.y = element_text(size=14, face="bold"))+
   xlab("Metabolite class")
