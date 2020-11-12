@@ -43,12 +43,12 @@ Install other dependencies and then try installing again: plyr,dplyr,tidyr,purrr
 
 2) <strong>Through Anaconda </strong></br>
 
-   environment.yml file is present in the repository. 
-   This file can be used be with Anaconda to install all of the R requirements. 
+   environment.yml file is present in the repository. </br>
+   This file can be used be with Anaconda to install all of the R requirements. </br>
 
-   Pre-requisite is Anaconda, run: 
-   conda env create -n metenp -f environment.yml to create the conda environment then activate the environment by running:
-   conda activate metenp
+   Pre-requisite is Anaconda, run: </br>
+   conda env create -n metenp -f environment.yml to create the conda environment then activate the environment by running:</br>
+   conda activate metenp</br>
    
 #### If you do not wish to install, alternatively, download from github(https://github.com/metabolomicsworkbench/MetENP) and load libraries and functions
 
