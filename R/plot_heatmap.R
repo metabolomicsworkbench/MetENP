@@ -8,9 +8,9 @@
 #'@importFrom ggplot2 geom_tile
 #'@importFrom ggplot2 scale_fill_continuous
 #'@examples
-#'plot_heatmap(met_path)
+#'plot_heatmap(met_path, shorten_name=TRUE,refmet_name=FALSE, xaxis, yaxis)
 
-plot_heatmap = function(met_path, shorten_name=TRUE,refmet_name=FALSE, xaxis=8, yaxis=6)
+plot_heatmap = function(met_path, shorten_name=TRUE,refmet_name=FALSE, xaxis, yaxis)
 {
 met_pathtoplot = unique(met_path[,c('Metabolite','refmet_name','PATHWAY','log2Fold_change')])
 global_pathways = c('Metabolic pathways','Biosynthesis of secondary metabolites',
