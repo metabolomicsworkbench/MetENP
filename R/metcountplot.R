@@ -1,7 +1,7 @@
 #'counts and plots significant metabolite
 #'@param df_metclass dataframe having significant metabolite with metabolite class as obtained from map_refmet_class.R
 #'@param metclass sub_class, main_class or super_class
-#'@param plot logical TRUE or FALSE, default true
+#'@param plotting logical TRUE or FALSE, default true
 #'@param thres_logfC log2 fold change threshold
 #'@importFrom reshape2 dcast
 #'@importFrom reshape2 melt
@@ -21,41 +21,41 @@ metcountplot <- function(df_metclass, metclass, plotting, thres_logfC)
 {
   df_metclass=df_metclass[abs(df_metclass$log2Fold_change)>=thres_logfC,]
   df_metclass=df_metclass %>%
-    mutate(Significant_Changes = (log2Fold_change>thres_logfC),
+    mutate(No.of_metabolites = (log2Fold_change>thres_logfC),
            neg = (log2Fold_change<thres_logfC))
 df_metclass=as.data.frame(df_metclass)
 
-  selected_refmet =df_metclass[, c(metclass, 'Significant_Changes','neg')]
+  selected_refmet =df_metclass[, c(metclass, 'No.of_metabolites','neg')]
   class_group = melt(selected_refmet, id.vars = c(metclass))
   class_group2=class_group[class_group$value == TRUE,]
   class_group2[[metclass]]=as.character(class_group2[[metclass]])
   dcast_grouping= dcast(class_group2, class_group2[,metclass] ~ variable, value.var = "value", fun.aggregate = sum)
   if (!("neg" %in% colnames(dcast_grouping))) {
-    count_changes = filter(dcast_grouping, abs(Significant_Changes) > 0)
+    count_changes = filter(dcast_grouping, abs(No.of_metabolites) > 0)
     names(count_changes)[1] = metclass
 
   }else{
   dcast_grouping$neg = dcast_grouping$neg* -1
   names(dcast_grouping)[1] = metclass
   neg_dcast_group = subset(dcast_grouping, select = c(metclass,'neg'))
-  colnames(neg_dcast_group)[2] <- "Significant_Changes"
+  colnames(neg_dcast_group)[2] <- "No.of_metabolites"
   dcast_grouping = subset(dcast_grouping, select = -neg)
   dcast_grouping2 <- bind_rows(dcast_grouping, neg_dcast_group)
   #count_changes = rbind(dcast_grouping, neg_dcast_group)
 
-  count_changes = filter(dcast_grouping2, abs(Significant_Changes) > 0)
+  count_changes = filter(dcast_grouping2, abs(No.of_metabolites) > 0)
 }
 
   if (plotting==TRUE)
   {
     for(i in 1:nrow(count_changes)){
-      if (count_changes$Significant_Changes[i] >0){
+      if (count_changes$No.of_metabolites[i] >0){
         count_changes[i, "color"] = "increased metabolites"
       }else
       { count_changes[i, "color"] = "decreased metabolites"}
     }
 
- p<- ggplot(data=count_changes, aes(x=count_changes[[metclass]], y=Significant_Changes,fill=color)) +
+ p<- ggplot(data=count_changes, aes(x=count_changes[[metclass]], y=No.of_metabolites,fill=color)) +
     geom_bar(stat="identity",color="black", width=0.5) + theme_bw()+
 
     theme(axis.text.x = element_text(angle = 90, hjust=1, vjust=1, size = 12),
