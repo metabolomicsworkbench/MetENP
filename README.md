@@ -43,13 +43,16 @@ Install other dependencies and then try installing again: plyr,dplyr,tidyr,purrr
 
 2) <strong>Through Anaconda </strong></br>
 
-   environment.yml file is present in the repository. </br>
+   A conda environment.yml file is present in the repository. </br>
    This file can be used be with Anaconda to install all of the R requirements. </br>
 
-   Pre-requisite is Anaconda, run: </br>
-   conda env create -n metenp -f environment.yml to create the conda environment then activate the environment by running:</br>
-   conda activate metenp</br>
-   
+   Create the conda environment and activate the environment by running:
+
+```
+   conda env create -n metenp -f environment.yml
+   conda activate metenp
+```
+
 #### If you do not wish to install, alternatively, download from github(https://github.com/metabolomicsworkbench/MetENP) and load libraries and functions
 
 suppressMessages(library(plyr))<br/>
@@ -100,3 +103,5 @@ source('path/getExtension.R')<br/>
 source('path/separate_data.R')<br/>
 
 Now please follow example in the vignette
+
+Run the vignette Jupyter Notebook on the web using My Binder: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/metabolomicsworkbench/MetENP/main?filepath=vignettes%2FMetENP_vignette_Jupyter_notebook.ipynb)
