@@ -29,7 +29,6 @@ significant_met <- function(metabolomics_data,met_col,analysis_type,
                             metadata,normalization, factor1, factor2, factor_col,sample_col, p_adjust)
 {
   combinedresult=list()
-
   for (a in 1:length(analysis_type)){
   metabolomics_data$refmet_name= gsub("\t", "", metabolomics_data$refmet_name)
   metabolomics_data$metabolite_name=as.character(metabolomics_data$metabolite_name)
@@ -49,7 +48,7 @@ analysis_selected=analysis_selected %>% dplyr::select(-analysis_summary)
 ### numeric data only
 }else{
   refmet_id = analysis_selected[,c('metabolite_name','refmet_name')]
-  analysis_selected=analysis_selected %>% dplyr::select(-refmet_name)
+  analysis_selected=analysis_selected %>% dplyr::select(-refmet_name,-analysis_summary)
 
 }
   met_col_name=analysis_selected[[met_col]]
@@ -61,7 +60,7 @@ analysis_selected=analysis_selected %>% dplyr::select(-analysis_summary)
 
 metabolomics_data_transposed <- as.data.frame(t(analysis_selected))
 metabolomics_data_transposed <- metabolomics_data_transposed [-1,]
-Factor = metadata[, factor_col]
+Factor = factor(metadata[, factor_col])
 metabolomics_data_transposed$Factor<-Factor[match(rownames(metabolomics_data_transposed), metadata[,sample_col])]
 
 metabolomics_data_subset=metabolomics_data_transposed[metabolomics_data_transposed$Factor %in% factor1 | metabolomics_data_transposed$Factor %in% factor2,]
@@ -152,10 +151,9 @@ if (typeof(metabolomics_data_subset$Factor)=='list'){
 
 mean_val = aggregate(metabolomics_data_subset2, list(metabolomics_data_subset$Factor), mean, na.rm=TRUE)}
 Means_transposed = as.data.frame(t(mean_val))
-colnames(Means_transposed)[1] <- paste(factor1, "mean", sep = "_")
-colnames(Means_transposed)[2] <- paste(factor2, "mean", sep = "_")
+names(Means_transposed) <- paste(as.character(unlist(Means_transposed[1,])), "mean",sep="_")
 Means_transposed = Means_transposed[-1,]
-Means_transposed$Fold_change=as.numeric(as.character(Means_transposed[,2])) / as.numeric(as.character(Means_transposed[,1]))
+Means_transposed$Fold_change=as.numeric(as.character(Means_transposed[,paste(factor2,"mean", sep="_")])) / as.numeric(as.character(Means_transposed[,paste(factor1,"mean", sep="_")]))
 Means_transposed$log2Fold_change=log2(as.numeric(as.character(Means_transposed[,3])))
 Means_transposed$Metabolite = row.names(Means_transposed)
 #row.names(Means_transposed)=NULL
