@@ -25,8 +25,14 @@ path_enrichmentscore <- function(met_path,sig_metabolite_kegg_id,ls_path,refmet_
   comp_path_count = unique(compound_count[,c("NAME","Total_no._of_comps_in_pathway")])
   met_compound_count=partial_join(met_path_selected, comp_path_count, by_x = "PATHWAY", pattern_y = "NAME")
   comp_path_count=comp_path_count[order(comp_path_count$NAME),]
+  df_met_comp_count=data.frame(table(met_compound_count[['PATHWAY']]))
+  df_met_comp_count2=df_met_comp_count[!df_met_comp_count$Freq==0,]
+  id=setdiff(df_met_comp_count2$Var1, comp_path_count$NAME)
+  df_met_comp_count3=df_met_comp_count2[which(!df_met_comp_count2$Var1 %in% id ),]
+  id2=setdiff( comp_path_count$NAME, df_met_comp_count2$Var1)
+  comp_path_count2= comp_path_count[which(!comp_path_count$NAME %in% id2 ),]
   #levels(met_compound_count[['PATHWAY']])=(factor(met_compound_count[['PATHWAY']]))
-  freqtable = cbind(data.frame(table(met_compound_count[['PATHWAY']])), comp_path_count)
+  freqtable = cbind(df_met_comp_count3, comp_path_count2)
   colnames(freqtable)[2] = "No.of mets in study"
   colnames(freqtable)[1] = "Pathway name"
   freqtable[3] = NULL
