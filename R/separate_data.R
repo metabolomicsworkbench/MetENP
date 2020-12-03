@@ -23,7 +23,7 @@ example_data2=cbind(Samples = rownames(example_data2), example_data2)
 rownames(example_data2) <- 1:nrow(example_data2)
 }else{example_data2=example_data}
 if (typedata=="metadata"){
-metadata= example_data2[1,1:(ncol(example_data2)-1)]
+metadata= example_data2[1,1:(ncol(example_data2))]
 metadata2=as.data.frame(t(metadata))
 metadata2= cbind(local_sample_id = rownames(metadata2 ), metadata2 )
 #names(metadata2)[2] = 'combined_factors'
