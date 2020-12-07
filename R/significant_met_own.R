@@ -43,6 +43,7 @@ met_col_name=analysis_selected[[met_col]]
 
 metabolomics_data_transposed <- as.data.frame(t(analysis_selected))
 metabolomics_data_transposed <- metabolomics_data_transposed [-1,]
+metadata[, factor_col]=as.character(metadata[, factor_col])
 Factor = factor(metadata[, factor_col])
 metabolomics_data_transposed$Factor<-Factor[match(rownames(metabolomics_data_transposed), metadata[,sample_col])]
 
