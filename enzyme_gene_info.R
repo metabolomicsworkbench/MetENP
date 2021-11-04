@@ -6,7 +6,9 @@
 #'@export
 #'@examples
 #'met_gene_info = enzyme_gene_info (metenrichment, "hsa","sub_class")
-
+library(tidyr)
+nest <- nest_legacy
+unnest <- unnest_legacy
 enzyme_gene_info <- function(df_metenrichment,sps, classm)
 {
   res= rxninfo(df_metenrichment)
@@ -23,7 +25,7 @@ enzyme_gene_info <- function(df_metenrichment,sps, classm)
   extract_info <- lapply(unlist_info, '[', c("ENTRY","NAME","DEFINITION","GENES"))
   dd=do.call(rbind, extract_info)
   df = as.data.frame(dd)
-  r=df %>% tidyr::unnest(c('GENES')
+  r=df %>% tidyr::unnest(c("GENES"))
   sps_ind = grep(paste0(sps,":"),r$GENES, ignore.case = TRUE)
   r2=r[sps_ind,]
   r2$GENES=gsub(paste0(casefold(sps,upper = TRUE),": "),"", r2$GENES)
