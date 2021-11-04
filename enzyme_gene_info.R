@@ -25,6 +25,7 @@ enzyme_gene_info <- function(df_metenrichment,sps, classm)
   extract_info <- lapply(unlist_info, '[', c("ENTRY","NAME","DEFINITION","GENES"))
   dd=do.call(rbind, extract_info)
   df = as.data.frame(dd)
+  ## deprecated API changed
   r=df %>% tidyr::unnest(c("GENES"))
   sps_ind = grep(paste0(sps,":"),r$GENES, ignore.case = TRUE)
   r2=r[sps_ind,]
