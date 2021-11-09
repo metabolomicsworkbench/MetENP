@@ -20,12 +20,11 @@ enzyme_gene_info <- function(df_metenrichment,sps, classm)
   info = llply(query_split, function(x)keggGet(x))
   unlist_info <- unlist(info, recursive = F)
   #print(str(unlist_info[1]))
-  # BUG FIX: 11/8/2021: keggGET no more returns DEFINITION
+  # BUG FIX: 11/8/2021: keggGET no more returns DEFINITION Sumana Srinivasan
   #extract_info <- lapply(unlist_info, '[', c("ENTRY","NAME","DEFINITION","GENES"))
   extract_info <- lapply(unlist_info, '[', c("ENTRY","NAME","GENES"))
   dd=do.call(rbind, extract_info)
   df = as.data.frame(dd)
-  print(colnames(df))
   r=df %>% tidyr::unnest('GENES')
   sps_ind = grep(paste0(sps,":"),r$GENES, ignore.case = TRUE)
   r2=r[sps_ind,]
@@ -48,12 +47,10 @@ enzyme_gene_info <- function(df_metenrichment,sps, classm)
   query = paste0(sps,":",query)
   ### pass the argument in list of 10s since keggrest takes 10 inputs
   query_split = split(query,  ceiling(seq_along(query)/10))
-
-
   ### kegg info
   info = llply(query_split, function(x)keggGet(x))
   unlist_info <- unlist(info, recursive = F)
-  # BUG FIX: 11/8/2021: keggGET no more returns DEFINITION
+  # BUG FIX: 11/8/2021: keggGET no more returns DEFINITION  for KeGG Orthology IDs Sumana Srinivasan
   #extract_info <- lapply(unlist_info, '[', c("ENTRY","NAME","DEFINITION","ORTHOLOGY","ORGANISM","PATHWAY","DBLINKS","MOTIF"))
   extract_info <- lapply(unlist_info, '[', c("ENTRY","NAME","ORTHOLOGY","ORGANISM","PATHWAY","DBLINKS","MOTIF"))
 
@@ -75,7 +72,7 @@ enzyme_gene_info <- function(df_metenrichment,sps, classm)
   orthology_gene_id = merge(df,orthology_info2, by="ORTHOLOGY")
   #names(orthology_gene_id)[1]='orthology_id'
   orthology_rxn_gene = merge(orthology_gene_id , met_orthology_reaction, by = "orthology_id")
-  # BUG FIX: 11/8/2021: keggGET no more returns DEFINITION
+  # BUG FIX: 11/8/2021: keggGET no more returns DEFINITION for species:geneId queries Sumana Srinivasan
   #namesc= c("orthology_id" , "ORTHOLOGY.x",   "gene_id", "gene_name", "DEFINITION", "ORGANISM", "PATHWAY", "DBLINKS","MOTIF",       "rxn", "Metabolite",  "KEGG ID", "sub_class", "Rxn_name" ,
   namesc= c("orthology_id" , "ORTHOLOGY.x",   "gene_id", "gene_name",  "ORGANISM", "PATHWAY", "DBLINKS","MOTIF",       "rxn", "Metabolite",  "KEGG ID", "sub_class", "Rxn_name" , "RCLASS","ORTHOLOGY.y","EQUATION","EQUATION_more" ,"ENZYME" )
 
