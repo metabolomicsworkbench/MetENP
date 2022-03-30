@@ -22,6 +22,8 @@ Download the MetENP R package: On linux/unix command prompt (or download a zip f
 
 $git clone https://github.com/metabolomicsworkbench/MetENP.git MetENP
 
+Start R and install devtools.
+
 install.packages("devtools")<br/>
 library("devtools")
 
