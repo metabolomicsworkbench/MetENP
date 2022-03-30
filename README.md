@@ -18,6 +18,9 @@ Contact: biosonal@gmail.com; kschoudhary@eng.ucsd.edu
 
 ## Installation
 
+Download the MetENP R package: On linux command prompt:
+$git clone https://github.com/metabolomicsworkbench/MetENP.git MetENP
+
 install.packages("devtools")<br/>
 library("devtools")
 
