@@ -34,7 +34,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
  BiocManager::install("KEGGREST")<br/>
  BiocManager::install("KEGGgraph")<br/>
  BiocManager::install("pathview")<br/>
- BiocManager::install("KEGG.db")<br/>
+ BiocManager::install("KEGG.db"); # only for BiocManager version < 3.13 <br/>
  
  #### Now proceed with installation
 1) <strong>Through devtools </strong></br>
