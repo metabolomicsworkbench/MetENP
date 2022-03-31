@@ -30,9 +30,14 @@ convert_refmet = function(metdata){
   }
   #extract_info <- lapply(df, '[', c(names(df[["Row1"]])))
   final=bind_rows(datalist2)
+  ## Sumana: change 3/31/2022, class_index deprecated in MW, both brances seem to do the same thing
   if ("metabolite_id" %in% colnames(metdata)){
-  final2=unique(dplyr::select(final,c( -exactmass, -class_index)))
-  }else{final2=unique(dplyr::select(final,c( -exactmass, -class_index)))}
+    ##final2=unique(dplyr::select(final,c( -exactmass, -class_index)))
+    final2=unique(dplyr::select(final,c( -exactmass)))
+  }else{
+    ##final2=unique(dplyr::select(final,c( -exactmass, -class_index)))
+    final2=unique(dplyr::select(final,c( -exactmass)))
+  }
   final2=final2[!duplicated(final2$metabolite_name),]
   #final3=final2[,c("metabolite_name","refmet_name")]
   metdata$metabolite_name=as.character(metdata$metabolite_name)
