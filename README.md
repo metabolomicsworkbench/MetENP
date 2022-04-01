@@ -168,7 +168,7 @@ The necessary files for installing MetENP R package are located inside the sub-f
 
 $cd ~/.local; mkdir R;</br>
 
-# Go to the folder one-level up of MetENP folder.
+#### Go to the folder one-level up of MetENP folder.
 
 [username@server one-level-up-of-MetENP]$R</br>
 
