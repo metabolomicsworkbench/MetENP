@@ -163,12 +163,15 @@ $ jupyter notebook --ip=123.249.124.012 --port=8080</br>
 If already installed, this section can be ignored.</br>
 Download or clone MetENP folder from github. Be careful not to overwrite existing folders [create and be in a different folder as needed].</br>
 $git clone https://github.com/metabolomicsworkbench/MetENP.git MetENP</br>
-The necessary files for installing MetENP R package are located inside the sub-folder MetENP_R inside the MetENPAppyter folder.</br>
-#### # install MetENP R package in user area: first copy MetENP from MetENP_R to /home/username/.local folder</br>
-$cd ~/.local; mkdir R;</br>
-[username@server .local]$cp -R /path-to-MetENPAppyter-folder/MetENP_R/MetENP .</br>
+The necessary files for installing MetENP R package are located inside the sub-folder R inside the MetENP folder.</br>
+#### # install MetENP R package in user area (e.g., /home/username/.local):</br>
 
-$R</br>
+$cd ~/.local; mkdir R;</br>
+
+# Go to the folder one-level up of MetENP folder.
+
+[username@server one-level-up-of-MetENP]$R</br>
+
 &#35; If devtools is not already installed for all, install it in system R or user R area (see how to set libloc below)</br>
 &#62;USER_HOME=Sys.getenv("HOME"); # so that we don’t need to hard code /home/username</br>
 &#62;reposlink = 'http://cran.r-project.org'; libloc = paste0(USER_HOME, “/.local/R/");</br>
@@ -186,7 +189,7 @@ $R</br>
 &#62;.libPaths( c( .libPaths(), paste0(USER_HOME, "/.local/R") )); # since MetENP installed in user area, need to include that in path</br>
 &#62;library("MetENP") # should load without errors</br>
 &#35; Now ready to run jupyter, being in a folder containing *.ipynb file, e.g., </br>
-/path-to-MetENPAppyter-folder/</br>
+/path-to-MetENP-folder/</br>
 $ jupyter notebook --ip=123.249.124.012 --port=8080</br>
 Go to webpage listed and open a MetENP jupyter notebook </br>
 Near top in that file, insert the lines, or some of these lines to set .libPaths and load MetENP R library.</br>
