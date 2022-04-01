@@ -13,7 +13,7 @@ MetENP is a R package that enables detection of significant metabolites from met
 5. Gets gene info, reaction info, enzyme info
 
 For more info, check out the vignette.
-Contact: biosonal@gmail.com; kschoudhary@eng.ucsd.edu
+Contact: biosonal@gmail.com; kschoudhary@eng.ucsd.edu, Mano Maurya (mano@sdsc.edu) or Sumana Srinivasan (susrinivasan@eng.ucsd.edu).
 
 
 ## Installation
@@ -36,14 +36,17 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
  BiocManager::install("KEGGREST")<br/>
  BiocManager::install("KEGGgraph")<br/>
  BiocManager::install("pathview")<br/>
- BiocManager::install("KEGG.db"); # only for BiocManager version < 3.13 <br/>
+
+ #BiocManager::install("KEGG.db"); # only for BiocManager version < 3.13 <br/>
  
  #### Now proceed with installation
 1) <strong>Through devtools </strong></br>
 
  devtools::install("MetENP")
  
- If above steps gives error:
+ If you do not have admin priviligages, you can install the packages in the user area, e.g., /home/username/.local/R. Please see detailed instructions below.
+ 
+ If above steps give error:
 Install other dependencies and then try installing again: plyr,dplyr,tidyr,purrr,tidygraph,reshape2,ggplot2,ggrepel,
     igraph,ggraph,httr,stringr,jsonlite,rjson,tidyverse,magrittr
 
@@ -80,7 +83,8 @@ suppressMessages(library(jsonlite))<br/>
 suppressMessages(library(rjson))<br/>
 suppressMessages(library(tidyverse))<br/>
 
-#### And load all the function with appropriate path (replace 'path' to your own path). 
+#### And load all the function with appropriate path (replace 'path' to your own path, e.g., they are inside R folder relative to the MetENP folder).
+
 #### Please note this step is needed only when you do not wish to download or are hving difficulty in downloading the package
 
 source('path/compoundinfo.R')<br/>
@@ -110,4 +114,87 @@ source('path/separate_data.R')<br/>
 
 Now please follow example in the vignette
 
-Run the vignette Jupyter Notebook on the web using My Binder: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/metabolomicsworkbench/MetENP/main?filepath=vignettes%2FMetENP_vignette_Jupyter_notebook.ipynb)
+Run the vignette Jupyter Notebook on the web using My Binder: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/metabolomicsworkbench/MetENP/test01?filepath=vignettes%2FMetENP_vignette_Jupyter_notebook.ipynb)
+
+## Detailed instructions 
+
+The syntax of paths is for linux/unix operating system. It can be adjusted for Windows.
+
+## (1) If one needs to install Jupyter</br>
+
+If already installed, this section can be ignored.</br>
+
+[[ for general information only:</br>
+basic commands: whereis python3 # can check version by starting python3</br>
+system python packages go to: /usr/lib/python3.9 /usr/lib64/python3.9 [if installed via sudo dnf] /usr/local/lib/python3.9  /usr/local/lib64/python3.9 [if installed via sudo pip3]</br>
+user/local python typically goes into $HOME/.local/various-folders</br>
+system R is at /usr/bin/R /usr/lib64/R</br>
+system R packages go into /usr/lib64/R/library</br>
+]]
+#### # is comment, $ at start indicates linux command
+Be in your home folder, /home/username: </br>
+&#35; install jupyter in user area, in the folder /home/username/.local/bunch-of-folders</br>
+$pip3 install --user --no-cache-dir jupyter</br>
+&#35; test it</br>
+$ jupyter notebook --ip=your_ip_address_format_123.249.124.012 --port=8080</br>
+Go to the page listed, e.g.,</br>
+http://123.249.124.012:8080/?token=4228fsdrjh346t3fdgve716452997a25f3e36b0dc2c3f02a3a0aa34</br>
+User can try to open any existing jupyter notebook if they are in the folder/subfolder</br>
+ctrl-C to stop</br>
+Install R package IRkernel # need to install R kernel for jupyter in user area; set libloc to user area, e.g., ${HOME}/.local/R if you do not have admin privileges.
+&#35; start R, being in home area ; > indicates R prompt</br>
+$R</br>
+&#62;reposlink = 'http://cran.r-project.org'; libloc = "/usr/lib64/R/library/";</br>
+&#62;pkgnames = c('IRkernel'); install.packages(pkgnames, repos=reposlink, lib=libloc);</br>
+&#62;IRkernel::installspec() # for only current user</br>
+&#62;q()</br>
+$ls -al .local/share/jupyter/kernels/</br>
+The output will appear similar to the lines below:</br>
+total 0</br>
+drwxrwxr-x. 4 username username  31 Nov  1 00:08 .</br>
+drwxrwxr-x. 7 username username 140 Nov  2 10:45 ..</br>
+drwxr-xr-x. 2 username username  64 Nov  1 00:08 ir</br>
+drwxrwxr-x. 2 username username  69 Oct 27 22:40 python3</br>
+ 
+#### # now jupyter notebooks based on R code should work after you select R kernel after starting jupyter
+$ jupyter notebook --ip=123.249.124.012 --port=8080</br>
+
+## (2)	How to Install MetENP R package through R devtools in user area</br>
+
+If already installed, this section can be ignored.</br>
+Download or clone MetENP folder from github. Be careful not to overwrite existing folders [create and be in a different folder as needed].</br>
+$git clone https://github.com/metabolomicsworkbench/MetENP.git MetENP</br>
+The necessary files for installing MetENP R package are located inside the sub-folder R inside the MetENP folder.</br>
+#### # install MetENP R package in user area (e.g., /home/username/.local):</br>
+
+$cd ~/.local; mkdir R;</br>
+
+#### Go to the folder one-level up of MetENP folder.
+
+[username@server one-level-up-of-MetENP]$R</br>
+
+&#35; If devtools is not already installed for all, install it in system R or user R area (see how to set libloc below)</br>
+&#62;USER_HOME=Sys.getenv("HOME"); # so that we don’t need to hard code /home/username</br>
+&#62;reposlink = 'http://cran.r-project.org'; libloc = paste0(USER_HOME, “/.local/R/");</br>
+&#62;#pkgnames = c("devtools"); install.packages(pkgnames, repos=reposlink, lib=libloc);</br>
+&#62;library("devtools");</br>
+&#62;devtools::install("MetENP", args = paste0("--library=", USER_HOME, "/.local/R")); # for unix local account # uses R CMD INSTALL</br>
+&#62;q()</br>
+#### # if all went well, this would have installed MetENP in /home/username/.local/R
+$ ls -al /home/username/.local/R</br>
+ 
+&#35; to check if MetENP can be loaded</br>
+$R</br>
+&#35; modify .libPaths so that it can find R package MetENP</br>
+&#62;USER_HOME=Sys.getenv("HOME");</br>
+&#62;.libPaths( c( .libPaths(), paste0(USER_HOME, "/.local/R") )); # since MetENP installed in user area, need to include that in path</br>
+&#62;library("MetENP") # should load without errors</br>
+&#35; Now ready to run jupyter, being in a folder containing *.ipynb file, e.g., </br>
+/path-to-MetENP-folder/</br>
+$ jupyter notebook --ip=123.249.124.012 --port=8080</br>
+Go to webpage listed and open a MetENP jupyter notebook </br>
+Near top in that file, insert the lines, or some of these lines to set .libPaths and load MetENP R library.</br>
+&#62;USER_HOME=Sys.getenv("HOME");</br>
+&#62;.libPaths( c( .libPaths(), paste0(USER_HOME, "/.local/R") ))</br>
+&#62;library("MetENP") # should load without errors</br>
+ 

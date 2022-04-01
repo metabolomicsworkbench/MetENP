@@ -6,6 +6,9 @@
 #'@export
 #'@examples
 #'met_gene_info = enzyme_gene_info (metenrichment, "hsa","sub_class")
+library(tidyr)
+nest <- nest_legacy
+unnest <- unnest_legacy
 enzyme_gene_info <- function(df_metenrichment,sps, classm)
 {
   res= rxninfo(df_metenrichment)
@@ -15,17 +18,15 @@ enzyme_gene_info <- function(df_metenrichment,sps, classm)
   #res_orthology=rename(res_orthology, c("NAME"="Rxn_name","ENTRY"="Rxn_id","id"="orthology_id"))
   query = as.vector(met_orthology_reaction$orthology_id)
   query = unique(query)
-  ### pass the argument in list of 10s since keggrest takes 10 inputs
+    ### pass the argument in list of 10s since keggrest takes 10 inputs
   query_split = split(query,  ceiling(seq_along(query)/10))
   info = llply(query_split, function(x)keggGet(x))
   unlist_info <- unlist(info, recursive = F)
-  #print(str(unlist_info[1]))
-  # BUG FIX: 11/8/2021: keggGET no more returns DEFINITION Sumana Srinivasan
-  #extract_info <- lapply(unlist_info, '[', c("ENTRY","NAME","DEFINITION","GENES"))
-  extract_info <- lapply(unlist_info, '[', c("ENTRY","NAME","GENES"))
+  extract_info <- lapply(unlist_info, '[', c("ENTRY","NAME","DEFINITION","GENES"))
   dd=do.call(rbind, extract_info)
   df = as.data.frame(dd)
-  r=df %>% tidyr::unnest('GENES')
+  ## deprecated API changed
+  r=df %>% tidyr::unnest(c("GENES"))
   sps_ind = grep(paste0(sps,":"),r$GENES, ignore.case = TRUE)
   r2=r[sps_ind,]
   r2$GENES=gsub(paste0(casefold(sps,upper = TRUE),": "),"", r2$GENES)
@@ -47,12 +48,12 @@ enzyme_gene_info <- function(df_metenrichment,sps, classm)
   query = paste0(sps,":",query)
   ### pass the argument in list of 10s since keggrest takes 10 inputs
   query_split = split(query,  ceiling(seq_along(query)/10))
+
+
   ### kegg info
   info = llply(query_split, function(x)keggGet(x))
   unlist_info <- unlist(info, recursive = F)
-  # BUG FIX: 11/8/2021: keggGET no more returns DEFINITION  for KeGG Orthology IDs Sumana Srinivasan
-  #extract_info <- lapply(unlist_info, '[', c("ENTRY","NAME","DEFINITION","ORTHOLOGY","ORGANISM","PATHWAY","DBLINKS","MOTIF"))
-  extract_info <- lapply(unlist_info, '[', c("ENTRY","NAME","ORTHOLOGY","ORGANISM","PATHWAY","DBLINKS","MOTIF"))
+  extract_info <- lapply(unlist_info, '[', c("ENTRY","NAME","DEFINITION","ORTHOLOGY","ORGANISM","PATHWAY","DBLINKS","MOTIF"))
 
   dd=do.call(rbind, extract_info)
   df = as.data.frame(dd)
@@ -72,9 +73,8 @@ enzyme_gene_info <- function(df_metenrichment,sps, classm)
   orthology_gene_id = merge(df,orthology_info2, by="ORTHOLOGY")
   #names(orthology_gene_id)[1]='orthology_id'
   orthology_rxn_gene = merge(orthology_gene_id , met_orthology_reaction, by = "orthology_id")
-  # BUG FIX: 11/8/2021: keggGET no more returns DEFINITION for species:geneId queries Sumana Srinivasan
-  #namesc= c("orthology_id" , "ORTHOLOGY.x",   "gene_id", "gene_name", "DEFINITION", "ORGANISM", "PATHWAY", "DBLINKS","MOTIF",       "rxn", "Metabolite",  "KEGG ID", "sub_class", "Rxn_name" ,
-  namesc= c("orthology_id" , "ORTHOLOGY.x",   "gene_id", "gene_name",  "ORGANISM", "PATHWAY", "DBLINKS","MOTIF",       "rxn", "Metabolite",  "KEGG ID", "sub_class", "Rxn_name" , "RCLASS","ORTHOLOGY.y","EQUATION","EQUATION_more" ,"ENZYME" )
+  namesc= c("orthology_id" , "ORTHOLOGY.x",   "gene_id", "gene_name", "DEFINITION", "ORGANISM", "PATHWAY", "DBLINKS","MOTIF",       "rxn", "Metabolite",  "KEGG ID", "sub_class", "Rxn_name" ,
+            "RCLASS","ORTHOLOGY.y","EQUATION","EQUATION_more" ,"ENZYME" )
 
   ### check if any column name is empty
   if (any(is.na(names(orthology_rxn_gene)))){

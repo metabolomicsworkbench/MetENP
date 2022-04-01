@@ -6,7 +6,7 @@ dependencies:
   - r-askpass
   - r-assertthat
   - r-backports
-  - r-base
+  - r-base=4.0.5
   - r-base64enc
   - r-bh
   - r-biocmanager
