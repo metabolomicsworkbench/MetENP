@@ -45,7 +45,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
  
  If you do not have admin priviligages, you can install the packages in the user area, e.g., /home/username/.local/R. Please see detailed instructions below.
  
- If above steps gives error:
+ If above steps give error:
 Install other dependencies and then try installing again: plyr,dplyr,tidyr,purrr,tidygraph,reshape2,ggplot2,ggrepel,
     igraph,ggraph,httr,stringr,jsonlite,rjson,tidyverse,magrittr
 
@@ -123,7 +123,6 @@ The syntax of paths is for linux/unix operating system. It can be adjusted for W
 
 If already installed, this section can be ignored.</br>
 
-#### This assumes several programs including python3 and some R libraries are already installed and working [see instructions above for MetENP]
 [[ for general information only:</br>
 basic commands: whereis python3 # can check version by starting python3</br>
 system python packages go to: /usr/lib/python3.9 /usr/lib64/python3.9 [if installed via sudo dnf] /usr/local/lib/python3.9  /usr/local/lib64/python3.9 [if installed via sudo pip3]</br>
@@ -162,8 +161,8 @@ $ jupyter notebook --ip=123.249.124.012 --port=8080</br>
 ## (2)	How to Install MetENP R package through R devtools in user area</br>
 
 If already installed, this section can be ignored.</br>
-Download or clone MetENPAppyter folder from github. Be careful not to overwrite existing folders [create and be in a different folder as needed].</br>
-$git clone https://github.com/metabolomicsworkbench/MetENPAppyter.git MetENPAppyter</br>
+Download or clone MetENP folder from github. Be careful not to overwrite existing folders [create and be in a different folder as needed].</br>
+$git clone https://github.com/metabolomicsworkbench/MetENP.git MetENP</br>
 The necessary files for installing MetENP R package are located inside the sub-folder MetENP_R inside the MetENPAppyter folder.</br>
 #### # install MetENP R package in user area: first copy MetENP from MetENP_R to /home/username/.local folder</br>
 $cd ~/.local; mkdir R;</br>
