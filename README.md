@@ -70,7 +70,7 @@ suppressMessages(library(tidyr))<br/>
 suppressMessages(library(tidygraph))<br/>
 suppressMessages(library(KEGGREST))<br/>
 suppressMessages(library(KEGGgraph))<br/>
-suppressMessages(library(KEGG.db))<br/>
+#suppressMessages(library(KEGG.db)); # only for BiocManager version < 3.13<br/>
 suppressMessages(library(pathview))<br/>
 suppressMessages(library(reshape2))<br/>
 suppressMessages(library(ggplot2))<br/>
