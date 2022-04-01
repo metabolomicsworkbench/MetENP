@@ -17,7 +17,6 @@ Imports:
 	tidygraph,
 	KEGGREST,
 	KEGGgraph,
-	KEGG.db,
 	pathview,
 	reshape2,
 	ggplot2,
