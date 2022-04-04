@@ -24,8 +24,14 @@ pathinfo = function(res, col_name)
   df = as.data.frame(dd)
   names(df)[2] = 'NAME'
   names(df)[3] = 'PATHWAY'
+  ## BUG FIX; Added by Sumana Srinivasan 0n 04042022
+  names(df)[4] = 'RCLASS'            
   names(df)[5] = 'ORTHOLOGY'
   names(df)[6] = 'EQUATION_more'
+  ## BUG FIX; Added by Sumana Srinivasan 0n 04042022, for rno, the ORTHOLOGY ENZYME column, keggGET returns NA and hence have to be named
+  ### named all columns to be consistent
+  names(df)[7] = 'EQUATION'
+  names(df)[8] = 'ENZYME'         
   ###pathway
   if (col_name == "PATHWAY"){
   path_info = df[,c("ENTRY","NAME","PATHWAY")]
