@@ -173,10 +173,12 @@ $cd ~/.local; mkdir R;</br>
 
 &#35; If devtools is not already installed for all, install it in system R or user R area (see how to set libloc below)</br>
 &#62;USER_HOME=Sys.getenv("HOME"); # so that we don’t need to hard code /home/username</br>
+&#62;USER_PWD=Sys.getenv("PWD");</br>
 &#62;reposlink = 'http://cran.r-project.org'; libloc = paste0(USER_HOME, “/.local/R/");</br>
 &#62;#pkgnames = c("devtools"); install.packages(pkgnames, repos=reposlink, lib=libloc);</br>
 &#62;library("devtools");</br>
 &#62;devtools::install("MetENP", args = paste0("--library=", USER_HOME, "/.local/R")); # for unix local account # uses R CMD INSTALL</br>
+&#62;#devtools::install("MetENP", args = paste0("--library=", USER_PWD, "/R")); # for unix local account # uses R CMD INSTALL</br>
 &#62;q()</br>
 #### # if all went well, this would have installed MetENP in /home/username/.local/R
 $ ls -al /home/username/.local/R</br>
@@ -185,7 +187,9 @@ $ ls -al /home/username/.local/R</br>
 $R</br>
 &#35; modify .libPaths so that it can find R package MetENP</br>
 &#62;USER_HOME=Sys.getenv("HOME");</br>
+&#62;USER_PWD=Sys.getenv("PWD");</br>
 &#62;.libPaths( c( .libPaths(), paste0(USER_HOME, "/.local/R") )); # since MetENP installed in user area, need to include that in path</br>
+&#62;#.libPaths( c( .libPaths(), paste0(USER_PWD, "/R") )); # If installed in the R folder inside PWD
 &#62;library("MetENP") # should load without errors</br>
 &#35; Now ready to run jupyter, being in a folder containing *.ipynb file, e.g., </br>
 /path-to-MetENP-folder/vignettes/</br>
