@@ -3,6 +3,7 @@
 #'@param metclass sub_class, main_class or super_class
 #'@param plotting logical TRUE or FALSE, default true
 #'@param thres_logfC log2 fold change threshold
+#'@param updown_fillcolor user-defined fill color for the bars for up/increased and down/decreased metabolites
 #'@importFrom reshape2 dcast
 #'@importFrom reshape2 melt
 #'@importFrom dplyr filter
@@ -11,13 +12,16 @@
 #'@importFrom ggplot2 element_line
 #'@importFrom ggplot2 element_blank
 #'@importFrom ggplot2 scale_size_manual
+#'@importFrom ggplot2 scale_fill_manual
 #'@importFrom ggplot2 labs
 #'@export
 #'@examples
 #'count_changes = metcountplot(df_metclass=sig_metabolites_pubchem, metclass='sub_class', plotting=TRUE, thres_logfC = 0.5)
 
 
-metcountplot <- function(df_metclass, metclass, plotting, thres_logfC)
+#Original:metcountplot <- function(df_metclass, metclass, plotting, thres_logfC)
+#Mano: 2022/06/18: adding arguments to let user decide bar fill color for up (increased) and down (decreased)
+metcountplot <- function(df_metclass, metclass, plotting, thres_logfC, updown_fillcolor=c("red", "green"))
 {
   df_metclass=df_metclass[abs(df_metclass$log2Fold_change)>=thres_logfC,]
   df_metclass=df_metclass %>%
@@ -55,6 +59,10 @@ df_metclass=as.data.frame(df_metclass)
       { count_changes[i, "color"] = "decreased metabolites"}
     }
 
+    # Mano: 2022/06/18: https://ggplot2.tidyverse.org/reference/scale_manual.html
+    # Mano: 2022/06/18: used named colors
+    fillcolor = c("increased metabolites" = updown_fillcolor[1], "decreased metabolites" = updown_fillcolor[2]);
+
  p<- ggplot(data=count_changes, aes(x=count_changes[[metclass]], y=No.of_metabolites,fill=color)) +
     geom_bar(stat="identity",color="black", width=0.5) + theme_bw()+
 
@@ -68,10 +76,16 @@ df_metclass=as.data.frame(df_metclass)
 
     theme(plot.title = element_text(hjust = 0.5)) +
     scale_size_manual(values = c(1,1)) +
-    #scale_fill_manual(values = c("blue","red")) +
-	xlab(paste0("Metabolite class:", metclass)) +
+    
+    #scale_fill_manual(values = c("blue","red")) + 
+
+
+    xlab(paste0("Metabolite class:", metclass)) +
     scale_color_manual(values = c("black", "black"))+ labs(fill = "sub-class")+
-   geom_hline(yintercept = 0)
+    geom_hline(yintercept = 0) +
+
+    # Mano: 2022/06/18: had to preped ggplot:: before scale_fill_manual, else was saying function not found
+    ggplot2::scale_fill_manual(values = fillcolor) ; # Mano: 2022/06/18: the user can decide the color, with default set to meaningful values
 
 
   return(list(sig_met_count= count_changes,plotimg= p))
