@@ -196,9 +196,9 @@ $R</br>
 $ jupyter notebook --ip=123.249.124.012 --port=8080</br>
 Go to webpage listed and open a MetENP jupyter notebook </br>
 Near top in that file, insert the lines, or some of these lines to set .libPaths and load MetENP R library.</br>
-&#62;USER_HOME=Sys.getenv("HOME");</br>
-&#62;USER_PWD=Sys.getenv("PWD");</br>
-&#62;.libPaths( c( .libPaths(), paste0(USER_HOME, "/.local/R") ))</br>
-&#62;#.libPaths( c( .libPaths(), paste0(USER_PWD, "/R") ))</br>
-&#62;library("MetENP") # should load without errors</br>
+USER_HOME=Sys.getenv("HOME");</br>
+USER_PWD=Sys.getenv("PWD");</br>
+.libPaths( c( .libPaths(), paste0(USER_HOME, "/.local/R") ))</br>
+#.libPaths( c( .libPaths(), paste0(USER_PWD, "/R") ))</br>
+library("MetENP") # should load without errors</br>
  
