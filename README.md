@@ -199,6 +199,6 @@ Near top in that file, insert the lines, or some of these lines to set .libPaths
 USER_HOME=Sys.getenv("HOME");</br>
 USER_PWD=Sys.getenv("PWD");</br>
 .libPaths( c( .libPaths(), paste0(USER_HOME, "/.local/R") ))</br>
-#.libPaths( c( .libPaths(), paste0(USER_PWD, "/R") ))</br>
+#.libPaths( c( .libPaths(), paste0(USER_PWD, "/../../R") ))</br>
 library("MetENP") # should load without errors</br>
  
