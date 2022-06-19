@@ -189,7 +189,7 @@ $R</br>
 &#62;USER_HOME=Sys.getenv("HOME");</br>
 &#62;USER_PWD=Sys.getenv("PWD");</br>
 &#62;.libPaths( c( .libPaths(), paste0(USER_HOME, "/.local/R") )); # since MetENP installed in user area, need to include that in path</br>
-&#62;#.libPaths( c( .libPaths(), paste0(USER_PWD, "/R") )); # If installed in the R folder inside PWD
+&#62;#.libPaths( c( .libPaths(), paste0(USER_PWD, "/R") )); # If installed in the R folder inside PWD</br>
 &#62;library("MetENP") # should load without errors</br>
 &#35; Now ready to run jupyter, being in a folder containing *.ipynb file, e.g., </br>
 /path-to-MetENP-folder/vignettes/</br>
@@ -197,6 +197,8 @@ $ jupyter notebook --ip=123.249.124.012 --port=8080</br>
 Go to webpage listed and open a MetENP jupyter notebook </br>
 Near top in that file, insert the lines, or some of these lines to set .libPaths and load MetENP R library.</br>
 &#62;USER_HOME=Sys.getenv("HOME");</br>
+&#62;USER_PWD=Sys.getenv("PWD");</br>
 &#62;.libPaths( c( .libPaths(), paste0(USER_HOME, "/.local/R") ))</br>
+&#62;#.libPaths( c( .libPaths(), paste0(USER_PWD, "/R") ))</br>
 &#62;library("MetENP") # should load without errors</br>
  
