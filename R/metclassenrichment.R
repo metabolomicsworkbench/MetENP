@@ -36,8 +36,8 @@ metclassenrichment <- function(df_metclass,refmet_class, metclass,enrich_stats,n
     	classname <-as.character(df_metclass[i,metclass])
 
 
-	#L = length(df_metclass) # Mano: 2022/06/21: This line seems wrong since length(data.frame) returns number of rows # it should be nrow(df_metclass)
-	L = nrow(df_metclass); 
+	#L = length(df_metclass) # Mano: 2022/06/21: This line seems wrong since length(data.frame) returns number of columns # it should be nrow(df_metclass)
+	L = nrow(df_metclass);
 	#L = nrow(ref[ref[[metclass]] == classname,])
     	N = nrow(refmet_class)
     	k = nrow(refmet_class[refmet_class[[metclass]] == classname,])
