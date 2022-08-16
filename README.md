@@ -112,7 +112,7 @@ source('path/separate_data.R')<br/>
 
 Now please follow example in the vignette
 
-Run the vignette Jupyter Notebook on the web using My Binder: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/metabolomicsworkbench/MetENP/test01?filepath=vignettes%2FMetENP_vignette_Jupyter_notebook.ipynb)
+Run the vignette Jupyter Notebook on the web using My Binder: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/metabolomicsworkbench/MetENP/HEAD?labpath=vignettes%2FMetENP_vignette_Jupyter_notebook.ipynb)
 
 ## Detailed instructions 
 
