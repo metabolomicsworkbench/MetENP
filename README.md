@@ -168,7 +168,8 @@ The necessary files for installing MetENP R package are located inside the sub-f
 $cd ~/.local; mkdir R;</br>
 
 #### Go to the folder one-level up of MetENP folder.
-
+If you want to install MetENP R package in the folder USER_PWD/R below, create the R folder.
+[username@server one-level-up-of-MetENP]$mkdir R
 [username@server one-level-up-of-MetENP]$R</br>
 
 &#35; If devtools is not already installed for all, install it in system R or user R area (see how to set libloc below)</br>
@@ -180,7 +181,7 @@ $cd ~/.local; mkdir R;</br>
 &#62;devtools::install("MetENP", args = paste0("--library=", USER_HOME, "/.local/R")); # for unix local account # uses R CMD INSTALL</br>
 &#62;#devtools::install("MetENP", args = paste0("--library=", USER_PWD, "/R")); # for unix local account # uses R CMD INSTALL</br>
 &#62;q()</br>
-#### # if all went well, this would have installed MetENP in /home/username/.local/R
+#### # if all went well, this would have installed MetENP in /home/username/.local/R (or current-folder/R)
 $ ls -al /home/username/.local/R</br>
  
 &#35; to check if MetENP can be loaded</br>
