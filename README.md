@@ -168,9 +168,9 @@ The necessary files for installing MetENP R package are located inside the sub-f
 $cd ~/.local; mkdir R;</br>
 
 #### Go to the folder one-level up of MetENP folder.
-If you want to install MetENP R package in the folder USER_PWD/R below, create the R folder.
-[username@server one-level-up-of-MetENP]$mkdir R
-[username@server one-level-up-of-MetENP]$R</br>
+If you want to install MetENP R package in the folder USER_PWD/R below, create the R folder.</br>
+[username@server one-level-up-of-MetENP]$mkdir R</br>
+[username@server one-level-up-of-MetENP]$R</br></br>
 
 &#35; If devtools is not already installed for all, install it in system R or user R area (see how to set libloc below)</br>
 &#62;USER_HOME=Sys.getenv("HOME"); # so that we don’t need to hard code /home/username</br>
@@ -202,4 +202,9 @@ USER_PWD=Sys.getenv("PWD");</br>
 .libPaths( c( .libPaths(), paste0(USER_HOME, "/.local/R") ))</br>
 #.libPaths( c( .libPaths(), paste0(USER_PWD, "/../../R") ))</br>
 library("MetENP") # should load without errors</br>
+
+#### # To make changes in the MetENP functions, such as to adjust plot features [2023/02/09]
+When possible, it is best to adjust them using arguments passed to function. If that is not possible, e.g., because the corresponding variable cannot be set through the arguments passed, then make a copy of the relevant R file in the folder ..../MetENP/R, edit the file/function suitably and save. Then source the file, e.g.:</br>
+&#62;source("PATH-TO-MetENP-FOLDER/R/significant_met_edited.R");</br>
+You may also have to load some libraries (see the lines with @importFrom in the R file) if such error messages are displayed. Once the edits are final, the edited file can be renamed (please keep a backup of the original file first) to the original file name and the MetENP package can be rebuilt using the steps above.
  
