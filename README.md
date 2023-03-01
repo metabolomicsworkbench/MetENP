@@ -177,11 +177,11 @@ If you want to install MetENP R package in the folder USER_PWD/R below, create t
 &#62;reposlink = 'http://cran.r-project.org'; libloc = paste0(USER_HOME, “/.local/R/");</br>
 &#62;#pkgnames = c("devtools"); install.packages(pkgnames, repos=reposlink, lib=libloc);</br>
 &#62;library("devtools");</br>
-&#62;devtools::install("MetENP", args = paste0("--library=", USER_HOME, "/.local/R")); # for unix local account # uses R CMD INSTALL</br>
 </br>
+&#62;devtools::install("MetENP", args = paste0("--library=", USER_HOME, "/.local/R")); # for unix local account # uses R CMD INSTALL</br>
 #### To install MetENP in the folder USER_PWD/R
 &#62;USER_PWD=Sys.getenv("PWD");</br>
-&#62;#devtools::install("MetENP", args = paste0("--library=", USER_PWD, "/R")); # for unix local account # uses R CMD INSTALL</br>
+&#62;devtools::install("MetENP", args = paste0("--library=", USER_PWD, "/R")); # for unix local account # uses R CMD INSTALL</br>
 &#62;q()</br>
 #### # if all went well, this would have installed MetENP in /home/username/.local/R (or current-folder/R)
 $ ls -al /home/username/.local/R</br>
