@@ -163,7 +163,7 @@ If already installed, this section can be ignored.</br>
 Download or clone MetENP folder from github. Be careful not to overwrite existing folders [create and be in a different folder as needed].</br>
 $git clone https://github.com/metabolomicsworkbench/MetENP.git MetENP</br>
 The necessary files for installing MetENP R package are located inside the sub-folder R inside the MetENP folder.</br>
-#### # install MetENP R package in user area (e.g., /home/username/.local):</br>
+#### # install MetENP R package in user area (e.g., /home/username/.local/R, or /home/username/some-folder/R):</br>
 
 $cd ~/.local; mkdir R;</br>
 
@@ -174,11 +174,13 @@ If you want to install MetENP R package in the folder USER_PWD/R below, create t
 
 &#35; If devtools is not already installed for all, install it in system R or user R area (see how to set libloc below)</br>
 &#62;USER_HOME=Sys.getenv("HOME"); # so that we don’t need to hard code /home/username</br>
-&#62;USER_PWD=Sys.getenv("PWD");</br>
 &#62;reposlink = 'http://cran.r-project.org'; libloc = paste0(USER_HOME, “/.local/R/");</br>
 &#62;#pkgnames = c("devtools"); install.packages(pkgnames, repos=reposlink, lib=libloc);</br>
 &#62;library("devtools");</br>
 &#62;devtools::install("MetENP", args = paste0("--library=", USER_HOME, "/.local/R")); # for unix local account # uses R CMD INSTALL</br>
+</br>
+#### To install MetENP in the folder USER_PWD/R
+&#62;USER_PWD=Sys.getenv("PWD");</br>
 &#62;#devtools::install("MetENP", args = paste0("--library=", USER_PWD, "/R")); # for unix local account # uses R CMD INSTALL</br>
 &#62;q()</br>
 #### # if all went well, this would have installed MetENP in /home/username/.local/R (or current-folder/R)
