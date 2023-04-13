@@ -203,7 +203,7 @@ USER_HOME=Sys.getenv("HOME");</br>
 USER_PWD=Sys.getenv("PWD");</br>
 .libPaths( c( .libPaths(), paste0(USER_HOME, "/.local/R") ))</br>
 #.libPaths( c( .libPaths(), paste0(USER_PWD, "/../../R") ))</br>
-library("MetENP") # should load without errors</br>
+library("MetENP") # Now, it should load without errors</br>
 
 #### # To make changes in the MetENP functions, such as to adjust plot features [2023/02/09]
 When possible, it is best to adjust them using arguments passed to function. If that is not possible, e.g., because the corresponding variable cannot be set through the arguments passed, then make a copy of the relevant R file in the folder ..../MetENP/R, edit the file/function suitably and save. Then source the file, e.g.:</br>
