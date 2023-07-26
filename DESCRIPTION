@@ -31,7 +31,8 @@ Imports:
 	magrittr,
 	data.table,
 	curl,
-	sjmisc
+	sjmisc,
+	tictoc
 License: mit_license
 Encoding: UTF-8
 LazyData: true
