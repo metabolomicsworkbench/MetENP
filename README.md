@@ -80,6 +80,7 @@ suppressMessages(library(stringr))<br/>
 suppressMessages(library(jsonlite))<br/>
 suppressMessages(library(rjson))<br/>
 suppressMessages(library(tidyverse))<br/>
+suppressMessages(library(tictoc))<br/>
 
 #### And load all the function with appropriate path (replace 'path' to your own path, e.g., they are inside R folder relative to the MetENP folder).
 
