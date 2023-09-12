@@ -184,6 +184,11 @@ If you want to install MetENP R package in the folder USER_PWD/R below, create t
 &#62;USER_PWD=Sys.getenv("PWD");</br>
 &#62;devtools::install("MetENP", args = paste0("--library=", USER_PWD, "/R")); # for unix local account # uses R CMD INSTALL</br>
 &#62;q()</br>
+
+One-liner for the above:</br>
+&#62;library("devtools"); USER_HOME=Sys.getenv("HOME");devtools::install("MetENP", args = paste0("--library=", USER_HOME, "/.local/R")); # for unix local account # uses R CMD INSTALL</br>
+&#62;library("devtools"); USER_PWD=Sys.getenv("PWD");devtools::install("MetENP", args = paste0("--library=", USER_PWD, "/R")); # for unix local account # uses R CMD INSTALL</br>
+
 #### # if all went well, this would have installed MetENP in /home/username/.local/R (or current-folder/R)
 $ ls -al /home/username/.local/R</br>
  
