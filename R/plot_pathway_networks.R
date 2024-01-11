@@ -59,12 +59,20 @@ thm <- theme_minimal() +
 
 theme_set(thm)
 
+# Mano: geom_edge_diagonal(aes_(colour = ~category) ..... has some issue, so, define pathway_color
+mycolor = colors()[-grep("white",colors())]; # exclude white and related 
 
 if (colorEdge) {
   igraph::E(graph_routes)$category <- factor(met_pathtoplot2$PATHWAY)
+
+  PATHWAY_unq = unique(met_pathtoplot2$PATHWAY); #Mano added: if the RHS of the above line changes then this also needs changing
+  PATHWAY_color = mycolor[match(met_pathtoplot2$PATHWAY, PATHWAY_unq)]; #Mano added: if the RHS of the above line changes then this also needs changing
+
   #edge_color <- geom_edge_diagonal(aes(colour=factor(met_pathtoplot2$PATHWAY)), alpha=.8,show.legend=FALSE)
   #edge_color <- geom_edge_diagonal(alpha=.8, colour='gray')
-  edge_color <- geom_edge_diagonal(aes_(colour = ~category), alpha=.8,show.legend=FALSE)
+
+  #edge_color <- geom_edge_diagonal(aes_(colour = ~category), alpha=.8,show.legend=FALSE) # Original line in use by Sonal
+  edge_color <- geom_edge_diagonal(aes_(colour = PATHWAY_color), alpha=.8,show.legend=FALSE) # Mano: 2023/05/02
 } else {
   edge_color <- geom_edge_diagonal(alpha=.8, colour='gray')
 }
@@ -102,13 +110,17 @@ for (i in 1:length(igraph::V(graph_routes)$name))
   }
 }
 
+# Mano: 2023/05/01: set midcolor so that if all log2Fold_change is 0 then set to this color (other than white)
+fc_range = range(fc, na.rm = TRUE);
+if(fc_range[2] == fc_range[1]){ midcolor = "black";} else {midcolor = "white";}
 
 ggraph(graph_routes, layout='kk') +
   edge_color+
 
   geom_node_point(aes_(color=~as.numeric(as.character(color)), size=~size, shape=~shape)) +
 
-  scale_colour_gradient2(name = "fold change", low = "green", high = "red",na.value = "#E5C494")+
+  #scale_colour_gradient2(name = "fold change", low = "green", high = "red",na.value = "#E5C494")+ # Original line by Sonal
+  scale_colour_gradient2(name = "fold change", low = "green", mid = midcolor, high = "red",na.value = "#E5C494")+ # Mano: added mid = midcolor
 
   geom_node_text(aes(label = name), repel=TRUE,size= ifelse(V(graph_routes)$name %in% met_path_fc$Metabolite, 4, 3.5),
                  fontface='bold',
