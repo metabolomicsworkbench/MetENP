@@ -15,6 +15,7 @@ MetENP is a R package that enables detection of significant metabolites from met
 For more info, check out the vignette.
 Contact: biosonal@gmail.com; kschoudhary@eng.ucsd.edu, Mano Maurya (mano@sdsc.edu) or Sumana Srinivasan (susrinivasan@eng.ucsd.edu).
 
+A BioRxiv preprint on MetENP is available at: https://www.biorxiv.org/content/10.1101/2020.11.20.391912v1 (DOI: https://doi.org/10.1101/2020.11.20.391912). Please follow the details at the GitHub page (this page) to ensure you use the latest version.
 
 ## Installation
 
