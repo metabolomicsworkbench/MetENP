@@ -14,6 +14,9 @@ rxninfo = function(class_mapped_data)
   aa = class_mapped_data
   aakegg = aa[["KEGG ID"]]
   aakegg = as.vector(aakegg)
+  # Mano: 2023/10/09: below, if any chunk of 10 or smaller (if last) has all "", then keggGet gives error, so, exclude ""
+  aakegg = unique(aakegg[aakegg != ""]) # exclude empty
+  # See also, for try catch: https://www.biostars.org/p/366463/
   
   ### pass the argument in list of 10s since keggrest takes 10 inputs
   aakegg = split(aakegg,  ceiling(seq_along(aakegg)/10))
