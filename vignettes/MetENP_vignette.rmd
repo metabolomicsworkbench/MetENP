@@ -5,6 +5,8 @@ date: "11/12/2020"
 output: html_document
 ---
 
+### Visit https://rmarkdown.rstudio.com/articles_intro.html for rmarkdown syntax
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -21,6 +23,12 @@ Gets gene info, reaction info, enzyme info
 
 
 ```{r}
+USER_HOME=Sys.getenv("HOME");
+USER_PWD=Sys.getenv("PWD");
+#.libPaths( c( .libPaths(), paste0(USER_HOME, "/.local/R") ))
+.libPaths( c( .libPaths(), paste0(USER_PWD, "/../../R") )); # suitable path to where MetENP R package is installed
+#.libPaths( c( .libPaths(), paste0("../../R") )); # suitable path to where MetENP R package is installed
+
 library(MetENP)
 library(jsonlite)
 ```
@@ -36,14 +44,13 @@ metdata = getmwstudies('ST000915', 'data')
 knitr::kable(head(metdata))
 ```
 
-
 Associate metabolomics data to the refmet class
 
 ```{r}
 refmet_class= convert_refmet(metdata)
+knitr::kable(head(refmet_class))
 
 ```
-
 
 ```{r}
 metadata = getmwstudies('ST000915', 'factors')
@@ -136,7 +143,7 @@ setdiff(sig_metabolites$refmet_name, sig_metabolites_kegg_id$refmet_name)
 You may choose from sub_class, main_class and super_class
 
 ```{r}
-count_changes = metcountplot(df_metclass=sig_metabolites_kegg_id, metclass='sub_class', plotting=TRUE, thres_logfC = 0.5)
+count_changes = metcountplot(df_metclass=sig_metabolites_kegg_id, metclass='sub_class', plotting=TRUE, thres_logfC = 0.0,  updown_fillcolor=c("red", "green"))
 
 ```
 
@@ -151,7 +158,7 @@ count_changes$plotimg
 Calculate the enrichment score of each metabolite class. Enrichment score is calculated through hypergeometric method. One can specify the no. of significant metabolites in a class while calculating the enrichment score. We advice to use the number of mtabolites in each class as 3 or more. But if someone just wants to know the enrichment score and rest of the information of all the metabolites, then they can choose the number as 1.
 
 ```{r}
-metenrichment = metclassenrichment(df_metclass=sig_metabolites_kegg_id,refmet_class, metclass="sub_class",enrich_stats="HG",no=3)
+metenrichment = metclassenrichment(df_metclass=sig_metabolites_kegg_id,refmet_class, metclass="sub_class",enrich_stats="HG",no=1, debug = 0)
 knitr::kable(head(metenrichment))
 ```
 
@@ -182,27 +189,27 @@ setdiff(metenrichment$Metabolite,unique(met_path$Metabolite))
 
 ### Get pathway enrichment sore.
 
-Once we have the pathway information, we can calculate enrichment score of pathways. Again, here i have used hypergeometric score. 
+Once we have the pathway information, we can calculate enrichment score of pathways. Again, here I have used hypergeometric (HG) score. For hypergeometric score, we need to know the total number of kegg compounds that are linked to kegg pathways.
 
-There are two ways to calculate in MetENP. If users want to calculate based on total no of metabolites detected in the study
-N= the total number of metabolites in a study, which can be retrieved from refmet_class dataframe.
+N = total no. of compounds/metabolites linked to all kegg pathways or the total number of metabolites detected in a study.
 
-Instead, if the users want to calculate HG score such that they can compare two studies, the N is the total no. of cmpds linked to kegg pathway (this is the step which might take long), so I advice to run the script comp_linkedto_pathways() just the first time or after 6 months or so, if desired to run the pipeline again. save the result from comp_linkedto_pathways() and load it. Loading from saved file would save time for another analysis with another study. 
+In the former case, this step might take long time, so I advice to run the script comp_linkedto_pathways() just the first time or after 6 months or so if desired to run the pipeline again. Save the result from comp_linkedto_pathways() and load it. Loading from saved file would save time for another analysis with another study. However the package takes care of loading. Save the data in the data folder.
 
-L = all significant metabolites detected in a study
-M= all significant metabolites detected in a pathway
-K =  all metabolites detected in a pathway
+L = No. of significant metabolites detected in a study
 
-phyper(M,L, N-L, K)
+M = No. of significant metabolites detected in a metabolite class or pathway
 
+k = Total no. of metabolites detected in a metabolite class/pathway
+
+p-value = phyper(M-1, L, N-L, k, lower.tail=FALSE) # as in the actual R code # originally, it was wriiten as: phyper(M, L, N-L, K)
 
 This function also utilizes korg dataset from pathview package.
 
 In this example, the background set N is the total number of metabolites in a study
 
 ```{r}
-load('C:/Users/bioso/Documents/MetENP/data/ls_path.RData')
-load('C:/Users/bioso/Documents/MetENP/data/korg.RData')
+load('../data/ls_path.RData')
+load('../data/korg.RData')
 kegg_es = path_enrichmentscore(met_path,sig_metabolite_kegg_id=sig_metabolite_kegg_id,ls_path=ls_path,refmet_class=refmet_class,sps='hsa',padj='fdr', kegg_comp_path=FALSE)
 knitr::kable(head(kegg_es))
 ```
@@ -228,7 +235,7 @@ plot_heatmap(met_path, shorten_name=TRUE,refmet_name=FALSE, xaxis=8, yaxis=6)
 ### Dotplot
 
 ```{r}
-dotplot_met_class_path (met_path, kegg_es,"sub_class",xaxis=10,yaxis=10)
+dotplot_met_class_path (met_path, kegg_es,"sub_class",xaxis=8,yaxis=6)
 ```
 
 
@@ -264,14 +271,14 @@ knitr::kable(head(met_gene_info2))
 Load your own dataset. If your dataset has sample name in 1st column, enter the third parameter as true. If the dataset has 1st column as metabolite names, enter the third parameter as false. Please check the example files in the data folder of the package.
 
 ```{r}
-data_own <- separate_data('C:/MAMP/htdocs/webdev/human_cachexia.csv',"data",TRUE)
+data_own <- separate_data('../data/human_cachexia.csv',"data",TRUE)
 
 knitr::kable(head(data_own))
 ```
 
 
 ```{r}
-metadata_own <- separate_data('C:/MAMP/htdocs/webdev/human_cachexia.csv',"metadata",TRUE)
+metadata_own <- separate_data('../data/human_cachexia.csv',"metadata",TRUE)
 knitr::kable(head(metadata_own))
 ```
 
