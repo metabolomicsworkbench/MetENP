@@ -271,14 +271,14 @@ knitr::kable(head(met_gene_info2))
 Load your own dataset. If your dataset has sample name in 1st column, enter the third parameter as true. If the dataset has 1st column as metabolite names, enter the third parameter as false. Please check the example files in the data folder of the package.
 
 ```{r}
-data_own <- separate_data('../data/human_cachexia.csv',"data",TRUE)
+data_own <- separate_data('./human_cachexia.csv',"data",TRUE)
 
 knitr::kable(head(data_own))
 ```
 
 
 ```{r}
-metadata_own <- separate_data('../data/human_cachexia.csv',"metadata",TRUE)
+metadata_own <- separate_data('./human_cachexia.csv',"metadata",TRUE)
 knitr::kable(head(metadata_own))
 ```
 
