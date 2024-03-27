@@ -216,4 +216,21 @@ library("MetENP") # Now, it should load without errors</br>
 When possible, it is best to adjust them using arguments passed to function. If that is not possible, e.g., because the corresponding variable cannot be set through the arguments passed, then make a copy of the relevant R file in the folder ..../MetENP/R, edit the file/function suitably and save. Then source the file, e.g.:</br>
 &#62;source("PATH-TO-MetENP-FOLDER/R/significant_met_edited.R");</br>
 You may also have to load some libraries (see the lines with @importFrom in the R file) if such error messages are displayed. Once the edits are final, the edited file can be renamed (please keep a backup of the original file first) to the original file name and the MetENP package can be rebuilt using the steps above.
- 
+
+## For developers: more advanced features
+### To update the documentation automatically after significant change such as adding or removing arguments to a function [2024/03/27]
+Assuming that roxygen tags are also updated accordingly for adding/removing arguments (e.g., in the line(s) #'@param and the line after #'@examples), then use the commmand:
+
+&#62;devtools::document('MetENP')
+
+This will update the .rd files inside MetENP/man; reinstall the MetENP package again using the procedure explained above.
+
+### To check the package structure, etc. [2024/03/27]
+
+Use the command rcmdcheck<br>
+&#62;rcmdcheck("MetENP")
+
+to identify errors/warning/notes.
+
+
+
