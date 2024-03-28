@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "kschoudhary@eng.ucsd.edu",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: This enrichment pipeline perfoms metabolic enrichment analysis. Essentially, it takes metabolite information (names or names and concentration along with metadata information) and provides: 1) enrichment score of metabolite class, 2) maps to pathway of the species of choice, 3) calculate enrichment score of pathways, 4) Plots the pathways and shows the metabolite increase or decrease,5) gets gene info, reaction info, enzyme info
+Description: This enrichment pipeline perfoms metabolic enrichment analysis. Essentially, it takes metabolite information (names or names and concentration along with metadata information) and provides: 1) enrichment score of metabolite class, 2) maps to pathway of the species of choice, 3) calculate enrichment score of pathways, 4) Plots the pathways and shows the metabolite increase or decrease,5) gets gene info, reaction info, and enzyme info.
 biocViews:
 Imports:
 	plyr,
@@ -33,11 +33,11 @@ Imports:
 	curl,
 	sjmisc,
 	tictoc
-License: mit_license
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.2.3
 Suggests: 
     knitr,
     rmarkdown,
@@ -45,5 +45,3 @@ Suggests:
     nlme,
     testthat
 VignetteBuilder: knitr
-
-    
