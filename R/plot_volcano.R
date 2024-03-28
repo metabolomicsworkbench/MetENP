@@ -2,8 +2,9 @@
 #'@param stats_metabolites dataframe obtained by running sig_metabolites.R
 #'@param thres_pval p value threshold
 #'@param thres_log2foldchange log2fold change threshold
+#'@param text_nooverlap TRUE to avoid text overlap, else FALSE
 #'@examples
-#'plot_volcano(stats_metabolites, thres_pval= 0.05,thres_log2foldchange = 0.5)
+#'plot_volcano(stats_metabolites, thres_pval= 0.05,thres_log2foldchange = 0.5, text_nooverlap = TRUE)
 #'@export
 #'@importFrom ggplot2 ggplot
 #'@importFrom ggplot2 geom_point

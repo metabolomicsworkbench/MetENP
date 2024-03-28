@@ -16,7 +16,7 @@
 #'@importFrom ggplot2 labs
 #'@export
 #'@examples
-#'count_changes = metcountplot(df_metclass=sig_metabolites_pubchem, metclass='sub_class', plotting=TRUE, thres_logfC = 0.5)
+#'count_changes = metcountplot(df_metclass=sig_metabolites_pubchem, metclass='sub_class', plotting=TRUE, thres_logfC = 0.5, updown_fillcolor=c("red", "green"))
 
 
 #Original:metcountplot <- function(df_metclass, metclass, plotting, thres_logfC)

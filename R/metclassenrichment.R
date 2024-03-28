@@ -3,12 +3,12 @@
 #'@param refmet_class dataframe having all the metabolites in the study with refmet classification
 #'@param metclass Sub class, Main class or Super class
 #'@param enrich_stats HG for hypergeometric score ## leaves room for further including of KS stats
-#'@param  no number of significant metabolites that should be in a class, default 1, should increase to 3 or more for a
-#'@param  debug flag to indicate if run in debug mode
+#'@param no number of significant metabolites that should be in a class, default 1, should increase to 3 or more for a
+#'@param debug flag to indicate if run in debug mode
 #'better statistically significant score. Default is chosen as 1 so as to get information on all the significant metabolites without any filtering.
 #'@export
 #'@examples
-#'metenrichment = metclassenrichment(df_metclass=sig_metabolites_kegg_id, refmet_class, metclass= "Sub class",enrich_stats="HG",no=1)
+#'metenrichment = metclassenrichment(df_metclass=sig_metabolites_kegg_id, refmet_class, metclass= "Sub class",enrich_stats="HG",no=1, debug = 0)
 #'@importFrom stats phyper
 
 metclassenrichment <- function(df_metclass,refmet_class, metclass,enrich_stats,no, debug = 0)
