@@ -17,10 +17,12 @@ plot_volcano(
 \item{thres_pval}{p value threshold}
 
 \item{thres_log2foldchange}{log2fold change threshold}
+
+\item{text_nooverlap}{TRUE to avoid text overlap, else FALSE}
 }
 \description{
 Plots Volcano plot
 }
 \examples{
-plot_volcano(stats_metabolites, thres_pval= 0.05,thres_log2foldchange = 0.5)
+plot_volcano(stats_metabolites, thres_pval= 0.05,thres_log2foldchange = 0.5, text_nooverlap = TRUE)
 }

@@ -4,20 +4,28 @@
 \alias{metcountplot}
 \title{counts and plots significant metabolite}
 \usage{
-metcountplot(df_metclass, metclass, plotting, thres_logfC)
+metcountplot(
+  df_metclass,
+  metclass,
+  plotting,
+  thres_logfC,
+  updown_fillcolor = c("red", "green")
+)
 }
 \arguments{
 \item{df_metclass}{dataframe having significant metabolite with metabolite class as obtained from map_refmet_class.R}
 
 \item{metclass}{sub_class, main_class or super_class}
 
+\item{plotting}{logical TRUE or FALSE, default true}
+
 \item{thres_logfC}{log2 fold change threshold}
 
-\item{plot}{logical TRUE or FALSE, default true}
+\item{updown_fillcolor}{user-defined fill color for the bars for up/increased and down/decreased metabolites}
 }
 \description{
 counts and plots significant metabolite
 }
 \examples{
-count_changes = metcountplot(df_metclass=sig_metabolites_pubchem, metclass='sub_class', plotting=TRUE, thres_logfC = 0.5)
+count_changes = metcountplot(df_metclass=sig_metabolites_pubchem, metclass='sub_class', plotting=TRUE, thres_logfC = 0.5, updown_fillcolor=c("red", "green"))
 }

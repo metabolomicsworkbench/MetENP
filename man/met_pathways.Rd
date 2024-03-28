@@ -4,17 +4,19 @@
 \alias{met_pathways}
 \title{Gives information on pathways linked to significant metabolites specific to species of choice}
 \usage{
-met_pathways(df_metenrichment, sps)
+met_pathways(df_metenrichment, sps, debug = 0)
 }
 \arguments{
 \item{df_metenrichment}{metenrichment score dataframe having metabolites, metabolite class and their enrichment score obtained
 from metclassenrichment}
 
 \item{sps}{species name}
+
+\item{debug}{1 to print some informative lines, 0 to suppress them}
 }
 \description{
 Gives information on pathways linked to significant metabolites specific to species of choice
 }
 \examples{
-met_path = met_pathways(df_metenrichment = metenrichment, 'hsa')
+met_path = met_pathways(df_metenrichment = metenrichment, sps = 'hsa', debug = 0)
 }

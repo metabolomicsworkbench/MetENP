@@ -4,7 +4,14 @@
 \alias{metclassenrichment}
 \title{Provides enrichment score of the selected metabolic class via hypergeometric score}
 \usage{
-metclassenrichment(df_metclass, refmet_class, metclass, enrich_stats, no)
+metclassenrichment(
+  df_metclass,
+  refmet_class,
+  metclass,
+  enrich_stats,
+  no,
+  debug = 0
+)
 }
 \arguments{
 \item{df_metclass}{dataframe having significant metabolite with metabolite class and kegg ids}
@@ -15,12 +22,14 @@ metclassenrichment(df_metclass, refmet_class, metclass, enrich_stats, no)
 
 \item{enrich_stats}{HG for hypergeometric score ## leaves room for further including of KS stats}
 
-\item{no}{number of significant metabolites that should be in a class, default 1, should increase to 3 or more for a
+\item{no}{number of significant metabolites that should be in a class, default 1, should increase to 3 or more for a}
+
+\item{debug}{flag to indicate if run in debug mode
 better statistically significant score. Default is chosen as 1 so as to get information on all the significant metabolites without any filtering.}
 }
 \description{
 Provides enrichment score of the selected metabolic class via hypergeometric score
 }
 \examples{
-metenrichment = metclassenrichment(df_metclass=sig_metabolites_kegg_id, refmet_class, metclass= "Sub class",enrich_stats="HG",no=1)
+metenrichment = metclassenrichment(df_metclass=sig_metabolites_kegg_id, refmet_class, metclass= "Sub class",enrich_stats="HG",no=1, debug = 0)
 }
