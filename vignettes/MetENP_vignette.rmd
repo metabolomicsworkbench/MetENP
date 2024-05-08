@@ -97,7 +97,7 @@ sample_col: the column name having samples
 
 p_adjust: Method for p value adjustment, i.e. "fdr"
 
-normalization: method for normalization a) "half_of_min": where the NAs are replaced by half of min values in the data b) "remove_NAs": where Cols with NAs values are removed and c) "50percent": where cols with more than 50% NAs values are removed
+normalization: method for normalization a) "half_of_min": where the NAs are replaced by half of min values in the data b) "remove_NAs": where Cols with NAs values are removed and c) "50percent": where cols with more than 50% NAs values are removed, and then the remaining NA values are replaced with half_of_min
 
 half_of_min is ideal when you wish to see which metabolites were present in either group. Very high fold change would mean it was present in either group.
 
@@ -205,7 +205,7 @@ p-value = phyper(M-1, L, N-L, k, lower.tail=FALSE) # as in the actual R code # o
 
 This function also utilizes korg dataset from pathview package.
 
-In this example, the background set N is the total number of metabolites in a study
+In this example, the background set N is the total number of metabolites in a study.
 
 ```{r}
 load('../data/ls_path.RData')
