@@ -96,8 +96,8 @@ if (length(factor1)>1|length(factor2) >1){
   for(i in 1:num){
     d<- metabolomics_data_normalized[metabolomics_data_normalized$Factor %in% factor2,i]
     n<- metabolomics_data_normalized[metabolomics_data_normalized$Factor %in% factor1,i]
-    tt <- t.test(n,d,alternative="two.sided",
-                 paired=FALSE)
+    #tt <- t.test(n,d,alternative="two.sided", paired=FALSE) # Mano: original till 2024/07/10
+    tt <- t.test(n,d,alternative="two.sided") # Mano: 2024/07/10: removed arg paired due to error
     ratio <- (mean(d)/mean(n))
     log2Fold_change <- log2(ratio)
 
@@ -121,8 +121,10 @@ names(results)[4]="padj"
 
 res <- ldply(
   cdatamod, function(Metabolite) {
-         t_val =t.test(metabolomics_data_normalized[[Metabolite]]~fac_col,alternative="two.sided", paired=FALSE)$statistic
-        p_val = t.test(metabolomics_data_normalized[[Metabolite]]~ fac_col,alternative="two.sided", paired=FALSE)$p.value
+        #t_val =t.test(metabolomics_data_normalized[[Metabolite]]~fac_col,alternative="two.sided", paired=FALSE)$statistic # Mano: original till 2024/07/10
+        #p_val = t.test(metabolomics_data_normalized[[Metabolite]]~ fac_col,alternative="two.sided", paired=FALSE)$p.value # Mano: original till 2024/07/10
+        t_val =t.test(metabolomics_data_normalized[[Metabolite]]~fac_col,alternative="two.sided")$statistic # Mano: 2024/07/10: removed arg paired due to error
+        p_val = t.test(metabolomics_data_normalized[[Metabolite]]~ fac_col,alternative="two.sided")$p.value # Mano: 2024/07/10: removed arg paired due to error
         return(data.frame(Metabolite=Metabolite, t_value=t_val, pval = p_val))
     })
 
