@@ -200,6 +200,11 @@ $R</br>
 &#62;USER_PWD=Sys.getenv("PWD");</br>
 &#62;.libPaths( c( .libPaths(), paste0(USER_HOME, "/.local/R") )); # since MetENP installed in user area, need to include that in path</br>
 &#62;#.libPaths( c( .libPaths(), paste0(USER_PWD, "/R") )); # If installed in the R folder inside PWD</br>
+
+One-liner for the above:</br>
+&#62;USER_HOME=Sys.getenv("HOME"); .libPaths( c( .libPaths(), paste0(USER_HOME, "/.local/R") ));</br>
+&#62;USER_PWD=Sys.getenv("PWD"); .libPaths( c( .libPaths(), paste0(USER_PWD, "/R") ));
+
 &#62;library("MetENP") # should load without errors</br>
 &#35; Now ready to run jupyter, being in a folder containing *.ipynb file, e.g., </br>
 /path-to-MetENP-folder/vignettes/</br>
