@@ -198,14 +198,14 @@ $R</br>
 &#35; modify .libPaths so that it can find R package MetENP</br>
 &#62;USER_HOME=Sys.getenv("HOME");</br>
 &#62;USER_PWD=Sys.getenv("PWD");</br>
-&#62;.libPaths( c( .libPaths(), paste0(USER_HOME, "/.local/R") )); # since MetENP installed in user area, need to include that in path</br>
-&#62;#.libPaths( c( .libPaths(), paste0(USER_PWD, "/R") )); # If installed in the R folder inside PWD</br>
+&#62;.libPaths( c( paste0(USER_HOME, "/.local/R"), .libPaths() )); # since MetENP installed in user area, need to include that in path</br>
+&#62;#.libPaths( c( paste0(USER_PWD, "/R"), .libPaths() )); # If installed in the R folder inside PWD</br>
 
 &#62;library("MetENP") # should load without errors</br>
 
 One-liner for the above:</br>
-&#62;USER_HOME=Sys.getenv("HOME"); .libPaths( c( .libPaths(), paste0(USER_HOME, "/.local/R") )); library("MetENP");</br>
-&#62;USER_PWD=Sys.getenv("PWD"); .libPaths( c( .libPaths(), paste0(USER_PWD, "/R") )); library("MetENP");
+&#62;USER_HOME=Sys.getenv("HOME"); .libPaths( c( paste0(USER_HOME, "/.local/R"), .libPaths() )); library("MetENP");</br>
+&#62;USER_PWD=Sys.getenv("PWD"); .libPaths( c( paste0(USER_PWD, "/R"), .libPaths() )); library("MetENP");
 
 &#35; Now ready to run jupyter, being in a folder containing *.ipynb file, e.g., </br>
 /path-to-MetENP-folder/vignettes/</br>
@@ -214,8 +214,8 @@ Go to webpage listed and open a MetENP jupyter notebook </br>
 Near top in that file, insert the lines, or some of these lines to set .libPaths and load MetENP R library.</br>
 USER_HOME=Sys.getenv("HOME");</br>
 USER_PWD=Sys.getenv("PWD");</br>
-.libPaths( c( .libPaths(), paste0(USER_HOME, "/.local/R") ))</br>
-#.libPaths( c( .libPaths(), paste0(USER_PWD, "/../../R") ))</br>
+.libPaths( c( paste0(USER_HOME, "/.local/R"), .libPaths() ))</br>
+#.libPaths( c( paste0(USER_PWD, "/../../R"), .libPaths() ))</br>
 library("MetENP") # Now, it should load without errors</br>
 
 ## (3) For developers: more advanced features
