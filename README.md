@@ -161,6 +161,24 @@ $ jupyter notebook --ip=123.249.124.012 --port=8080</br>
 
 ## (2)	How to Install MetENP R package through R devtools in user area</br>
 
+### (2.1)	If any of the packages need to be installed and used from a non-system/non-standard location:</br>
+
+Here, we use KEGGREST as an example, which was updated in its GitHub repo in the devel branch:
+
+Being in some user folder, do:
+
+$ git clone -b devel https://github.com/Bioconductor/KEGGREST.git KEGGREST
+
+This downloads the source files into the folder KEGGREST
+Install it into a subfolder R:
+$ mkdir R
+$ R
+&#62;library("devtools"); USER_PWD=Sys.getenv("PWD");devtools::install("KEGGREST", args = paste0("--library=", USER_PWD, "/R")); # Instructions for installing devtools are given below.
+&#62;# To use this installation of KEGGREST in installing MetENP below, do:
+&#62;.libPaths( c( paste0(USER_PWD, "/R"), .libPaths() ));library(KEGGREST); # Replace the first argument to any other path as desired
+
+### (2.2)	How to Install MetENP R package through R devtools in user area</br>
+
 If already installed, this section can be ignored.</br>
 Download or clone MetENP folder from github. Be careful not to overwrite existing folders [create and be in a different folder as needed].</br>
 $git clone https://github.com/metabolomicsworkbench/MetENP.git MetENP</br>
