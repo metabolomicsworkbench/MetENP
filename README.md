@@ -43,7 +43,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 
  devtools::install("MetENP")
  
- If you do not have admin priviligages, you can install the packages in the user area, e.g., /home/username/.local/R. Please see detailed instructions below.
+ If you do not have admin privileges, you can install the packages in the user area, e.g., /home/username/.local/R. Please see detailed instructions below.
  
  If above steps give error:
 Install other dependencies and then try installing again: plyr,dplyr,tidyr,purrr,tidygraph,reshape2,ggplot2,ggrepel,
