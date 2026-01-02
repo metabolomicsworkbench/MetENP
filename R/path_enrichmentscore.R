@@ -5,7 +5,7 @@
 #'sysdata.rda
 #'@param sps species name
 #'@param padj Method for p value adjustment, i.e. "fdr"
-#'@param sig_metabolite_kegg_id dataframe of significantly altered metabolites for HG calculation
+#'@param sig_metabolites_kegg_id dataframe of significantly altered metabolites for HG calculation
 #'@param refmet_class dataframe of metabolite data with refmet class for a study, alternatively,
 #'data obtained from rest can also be given here which is yet not associated to refmet class
 #'We need this to get the number of all the metabolites detected in the study for calculating HG score.
@@ -15,9 +15,9 @@
 #'@importFrom stats phyper
 #'@export
 #'@examples
-#'kegg_es = path_enrichmentscore(met_path,sig_metabolite_kegg_id, ls_path,refmet_class,sps='hsa',padj='fdr')
+#'kegg_es = path_enrichmentscore(met_path,sig_metabolites_kegg_id, ls_path,refmet_class,sps='hsa',padj='fdr')
 
-path_enrichmentscore <- function(met_path,sig_metabolite_kegg_id,ls_path,refmet_class,sps, padj,kegg_comp_path=FALSE)
+path_enrichmentscore <- function(met_path,sig_metabolites_kegg_id,ls_path,refmet_class,sps, padj,kegg_comp_path=FALSE)
 {
   compound_count = compoundinfo(met_path, sps)
   met_path_selected = met_path[,c('Metabolite', 'PATHWAY')] %>% distinct
@@ -53,3 +53,12 @@ path_enrichmentscore <- function(met_path,sig_metabolite_kegg_id,ls_path,refmet_
   freqtable$Padjust = p.adjust(freqtable$pathway_HG, padj)
   return(freqtable)
 }
+
+# Mano: 2023/04/28: added the following comments just for understanding
+# A hypergeometric (HG) test is performed based on phyper function in R. The p-value is calculated as: p = phyper(M-1, L, N-L, k, lower.tail=FALSE),
+# where N = (the count of) all metabolites detected in a study, L = all significant metabolites detected in a study,
+# M = all significant metabolites detected in a metabolite class or pathway and k = all metabolites detected in a metabolite class/pathway.
+
+# See also: http://pedagogix-tagc.univ-mrs.fr/courses/statistics_bioinformatics/practicals/ASG1_2012/go_statistics_td/go_statistics_td.html
+# Please note that the role of L and k can be changed: it makes sense because in a Venn diagram with two sets,
+# interchanging the sets doesn't affect the intersection and the overall scenario.
