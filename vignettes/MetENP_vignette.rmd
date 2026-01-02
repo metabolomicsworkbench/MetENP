@@ -210,7 +210,7 @@ In this example, the background set N is the total number of metabolites in a st
 ```{r}
 load('../data/ls_path.RData')
 load('../data/korg.RData')
-kegg_es = path_enrichmentscore(met_path,sig_metabolite_kegg_id=sig_metabolite_kegg_id,ls_path=ls_path,refmet_class=refmet_class,sps='hsa',padj='fdr', kegg_comp_path=FALSE)
+kegg_es = path_enrichmentscore(met_path,sig_metabolites_kegg_id=sig_metabolites_kegg_id,ls_path=ls_path,refmet_class=refmet_class,sps='hsa',padj='fdr', kegg_comp_path=FALSE)
 knitr::kable(head(kegg_es))
 ```
 
@@ -323,3 +323,4 @@ plot_met_enrichment(metenrichment, metclass='sub_class',"HG", no=1)
 ```
 
 The rest of the pipeline can be followed similarly.
+
