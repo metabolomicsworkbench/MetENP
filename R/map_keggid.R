@@ -1,15 +1,17 @@
 #'Assigns kegg id to the significant metabolites
 #'@param sig_metabolites dataframe having significant metabolite with metabolite class
+#'@param debug 0 or 1 to help with debugging
 #'@export
 #'@examples
 #'sig_metabolites_kegg_id= map_keggid(sig_metabolites)
 
 
-map_keggid = function(sig_metabolites){
+map_keggid = function(sig_metabolites, debug = 0){
 
   datalist = list()
   for (i in 1:nrow(sig_metabolites))
   {
+    if(debug){print('refmet_name:'); print(sig_metabolites[["refmet_name"]][i]);}
     path= paste0('https://www.metabolomicsworkbench.org/databases/refmet/name_to_refmet_kegg.php?metabolite_name=',sig_metabolites[["refmet_name"]][i])
 
     if (grepl("\\s*", path)){
@@ -17,6 +19,7 @@ map_keggid = function(sig_metabolites){
     }
     r <- httr::GET(url = path)
     #r <- content(r, as = "text", encoding = "UTF-8")
+    if(debug){print('Value returned from httr::GET:'); print(r);}
     df=read.csv(textConnection(httr::content(r, 'text')), sep="\t", header = FALSE)
     #df_t=as.data.frame(t(df))
     names(df) <- as.character(unlist(df[1,]))
@@ -25,6 +28,7 @@ map_keggid = function(sig_metabolites){
     df=dplyr::rename(df, "refmet_name"="Standardized name")
     #df[['refmet_name']]=df[,"Standardized name"][i]
     datalist[[i]]  = df
+    if(debug){print('df:'); print(df);}
   }
   refmet_kegg_match = do.call(rbind, datalist)
   refmet_kegg_match=dplyr::select(refmet_kegg_match,!c('In RefMet'))
