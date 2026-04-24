@@ -25,7 +25,7 @@ plot_pathway_networks = function(met_path, kegg_es, colorEdge)
 {
   pathway_enrichment = merge(met_path, kegg_es, by.x="PATHWAY",by.y="Pathway name")
 
-  #significant_pathways = pathway_enrichment[which(pathway_enrichment$pathway_HG < 0.05),]
+  #significant_pathways = pathway_enrichment[which(pathway_enrichment$pathway_HG_p_value < 0.05),]
 
 significant_pathways = pathway_enrichment
 met_pathtoplot = unique(significant_pathways[,c('Metabolite','PATHWAY')])
@@ -77,9 +77,17 @@ if (colorEdge) {
   edge_color <- geom_edge_diagonal(alpha=.8, colour='gray')
 }
 
-fc= met_path_fc$log2Fold_change[which(met_path_fc$Metabolite %in%  V(graph_routes)$name)]
-igraph::V(graph_routes)$color = NA
-igraph::V(graph_routes)$color[which(V(graph_routes)$name %in% met_path_fc$Metabolite)] =fc
+# Origial lines, has bug
+#fc= met_path_fc$log2Fold_change[which(met_path_fc$Metabolite %in%  V(graph_routes)$name)]
+#igraph::V(graph_routes)$color = NA
+#igraph::V(graph_routes)$color[which(V(graph_routes)$name %in% met_path_fc$Metabolite)] =fc
+
+# Hardik, Mano: 2026/04/14: bug fixed and more streamlined
+ind = match(igraph::V(graph_routes)$name, met_path_fc$Metabolite);
+fc = met_path_fc$log2Fold_change[ind];
+#igraph::V(graph_routes)$color = NA; # This line is not needed
+igraph::V(graph_routes)$color = fc;
+
 igraph::V(graph_routes)$size = 5 ## set min
 tt = as.data.frame(table(met_pathtoplot2$PATHWAY))
 #tt$Freq=tt$Freq*3
@@ -120,7 +128,7 @@ ggraph(graph_routes, layout='kk') +
   geom_node_point(aes_(color=~as.numeric(as.character(color)), size=~size, shape=~shape)) +
 
   #scale_colour_gradient2(name = "fold change", low = "green", high = "red",na.value = "#E5C494")+ # Original line by Sonal
-  scale_colour_gradient2(name = "fold change", low = "green", mid = midcolor, high = "red",na.value = "#E5C494")+ # Mano: added mid = midcolor
+  scale_colour_gradient2(name = "Log2 fold change", low = "green", mid = midcolor, high = "red",na.value = "#E5C494")+ # Mano: added mid = midcolor
 
   geom_node_text(aes(label = name), repel=TRUE,size= ifelse(V(graph_routes)$name %in% met_path_fc$Metabolite, 4, 3.5),
                  fontface='bold',
