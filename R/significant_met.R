@@ -140,9 +140,14 @@ res <- ldply(
   cdatamod, function(Metabolite) {
         #t_val =t.test(metabolomics_data_normalized[[Metabolite]]~fac_col,alternative="two.sided", paired=FALSE)$statistic # Mano: original till 2024/07/10
         #p_val = t.test(metabolomics_data_normalized[[Metabolite]]~ fac_col,alternative="two.sided", paired=FALSE)$p.value # Mano: original till 2024/07/10
-        t_val =t.test(metabolomics_data_normalized[[Metabolite]]~fac_col,alternative="two.sided")$statistic # Mano: 2024/07/10: removed arg paired due to error
-        p_val = t.test(metabolomics_data_normalized[[Metabolite]]~ fac_col,alternative="two.sided")$p.value # Mano: 2024/07/10: removed arg paired due to error
-        return(data.frame(Metabolite=Metabolite, t_value=t_val, pval = p_val))
+        #t_val =t.test(metabolomics_data_normalized[[Metabolite]]~fac_col,alternative="two.sided")$statistic # Mano: 2024/07/10: removed arg paired due to error
+        #p_val = t.test(metabolomics_data_normalized[[Metabolite]]~ fac_col,alternative="two.sided")$p.value # Mano: 2024/07/10: removed arg paired due to error
+        #return(data.frame(Metabolite=Metabolite, t_value=t_val, pval = p_val))
+	# Mano: 2026/04/16:call t.test only once
+	ttest_res = t.test(metabolomics_data_normalized[[Metabolite]]~fac_col,alternative="two.sided");
+	t_val = ttest_res$statistic;
+	p_val = ttest_res$p.value;
+	return(data.frame(Metabolite=Metabolite, t_value=t_val, pval = p_val))
     })
 
 
