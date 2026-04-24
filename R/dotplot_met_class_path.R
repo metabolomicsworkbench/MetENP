@@ -37,11 +37,12 @@ names(freq)[2] =classm
 pathway_enrichment = merge(freq, kegg_es, by.x="PATHWAY","Pathway name")
 significant_pathways = pathway_enrichment
  
+# Mano: 2026/01/02: Use the column name: pathway_HG_p_value instead of "pathway_HG p-value"
 if (nrow(significant_pathways)==0)
 {significant_pathways = pathway_enrichment}else{significant_pathways =significant_pathways}
 ggplot(significant_pathways, aes_(y=~PATHWAY, x=significant_pathways[[classm]])) +
 
-  geom_point(aes(size=Freq, color=-log10(significant_pathways[["pathway_HG p-value"]])))+
+  geom_point(aes(size=Freq, color=-log10(significant_pathways[["pathway_HG_p_value"]])))+
   scale_color_continuous(low = "blue", high = "red",guide=guide_colorbar(reverse=TRUE))+
   theme_bw() + labs(color = "-log10 p-value HG")+
 
