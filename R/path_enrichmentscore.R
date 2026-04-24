@@ -11,13 +11,14 @@
 #'We need this to get the number of all the metabolites detected in the study for calculating HG score.
 #'@param kegg_comp_path TRUE or FALSE depending you want to use the ls_path as your background. Default is FALSE, where background set
 #'is the total metabolite in a study
+#'@param debug 0 or 1 to help with debugging
 #'@importFrom stats p.adjust
 #'@importFrom stats phyper
 #'@export
 #'@examples
 #'kegg_es = path_enrichmentscore(met_path,sig_metabolites_kegg_id, ls_path,refmet_class,sps='hsa',padj='fdr')
 
-path_enrichmentscore <- function(met_path,sig_metabolites_kegg_id,ls_path,refmet_class,sps, padj,kegg_comp_path=FALSE)
+path_enrichmentscore <- function(met_path,sig_metabolites_kegg_id,ls_path,refmet_class,sps, padj,kegg_comp_path=FALSE, debug = 0)
 {
   compound_count = compoundinfo(met_path, sps)
   met_path_selected = met_path[,c('Metabolite', 'PATHWAY')] %>% distinct
