@@ -40,7 +40,7 @@ p=ggplot(met_pathtoplot2, aes_(~refmet_name, met_pathtoplot2$PATHWAY))
 }else{p=ggplot(met_pathtoplot2, aes_(~Metabolite, met_pathtoplot2$PATHWAY)) }
 
 p + geom_tile(aes_(fill = ~log2Fold_change), color = "white") +
-  scale_fill_continuous(low="blue", high="red", name = "fold change")+
+  scale_fill_continuous(low="blue", high="red", name = "Log2 fold change")+
   theme_minimal() +
   xlab("Metabolite name") +
   ylab("Pathway name") +
