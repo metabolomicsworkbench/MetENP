@@ -48,10 +48,10 @@ path_enrichmentscore <- function(met_path,sig_metabolites_kegg_id,ls_path,refmet
     M = freqtable[i,2]### altered met in the pathway
     L = nrow(sig_metabolites_kegg_id) ## total altered met
     pp<-phyper(M-1,L, N-L,k, lower.tail=FALSE)
-    freqtable[i,"pathway_HG p-value"] <- pp
+    freqtable[i,"pathway_HG_p_value"] <- pp
   }
 
-  freqtable$Padjust = p.adjust(freqtable$pathway_HG, padj)
+  freqtable$Padjust = p.adjust(freqtable$pathway_HG_p_value, padj)
   return(freqtable)
 }
 
