@@ -191,7 +191,7 @@ setdiff(metenrichment$Metabolite,unique(met_path$Metabolite))
 
 Once we have the pathway information, we can calculate enrichment score of pathways. Again, here I have used hypergeometric (HG) score. For hypergeometric score, we need to know the total number of kegg compounds that are linked to kegg pathways.
 
-N = total no. of compounds/metabolites linked to all kegg pathways or the total number of metabolites detected in a study.
+N = total no. of compounds/metabolites linked to all kegg pathways (kegg_comp_path = TRUE) or the total number of metabolites detected in a study (kegg_comp_path = FALSE).
 
 In the former case, this step might take long time, so I advice to run the script comp_linkedto_pathways() just the first time or after 6 months or so if desired to run the pipeline again. Save the result from comp_linkedto_pathways() and load it. Loading from saved file would save time for another analysis with another study. However the package takes care of loading. Save the data in the data folder.
 
@@ -210,7 +210,7 @@ In this example, the background set N is the total number of metabolites in a st
 ```{r}
 load('../data/ls_path.RData')
 load('../data/korg.RData')
-kegg_es = path_enrichmentscore(met_path,sig_metabolites_kegg_id=sig_metabolites_kegg_id,ls_path=ls_path,refmet_class=refmet_class,sps='hsa',padj='fdr', kegg_comp_path=FALSE)
+kegg_es = path_enrichmentscore(met_path,sig_metabolites_kegg_id=sig_metabolites_kegg_id,ls_path=ls_path,refmet_class=refmet_class,sps='hsa',padj='fdr', kegg_comp_path=FALSE, debug = 0)
 knitr::kable(head(kegg_es))
 ```
 
@@ -314,7 +314,7 @@ count_changes$plotimg
 ```
 
 ```{r}
-metenrichment = metclassenrichment(df_metclass=sig_metabolites_kegg_id, refmet_names, metclass= 'sub_class',enrich_stats="HG",no=1)
+metenrichment = metclassenrichment(df_metclass=sig_metabolites_kegg_id, refmet_names, metclass= 'sub_class',enrich_stats="HG",no=1, debug = 0)
 
 ```
 
